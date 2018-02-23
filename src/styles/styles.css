@@ -164,7 +164,7 @@ p {
 }
 
 .sidebar-wrapper .skills-container {
-  margin-top: 274px;
+  margin-top: 180px;
 }
 
 .sidebar-wrapper .skills-container .lang-desc {
@@ -182,7 +182,7 @@ p {
 
 .main-wrapper {
   background: #fff;
-  padding: 30px 270px 10px 30px;
+  padding: 10px 270px 10px 30px;
 }
 .main-wrapper .section-title {
   text-transform: uppercase;
@@ -219,7 +219,7 @@ p {
   margin-top: 20px;
 }
 .main-wrapper .category-section .item {
-  margin-bottom: 40px;
+  margin-bottom: 35px;
 }
 
 .main-wrapper .upper-row {
@@ -285,7 +285,7 @@ p {
 }
 
 .pageSpacing {
-  margin-top: 80px
+  margin-top: 115px
 }
 
 .main-wrapper .keywords {
