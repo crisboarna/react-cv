@@ -14,3 +14,6 @@
 ## Live CV
 Live CV with download to PDF [here](https://crisboarna.github.io/react-cv)
 * Please note it does not have responsive layout due to requirement to adhere to A4 page dimensions
+
+## TODO
+ - Fix production build PDF export
