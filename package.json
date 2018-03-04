@@ -13,10 +13,11 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom --coverage",
     "test:watch": "node scripts/test.js --env=jsdom --coverage --watch",
-    "precommit": "CI=test npm test",
+    "precommit": "CI=test npm test && npm run flow && npm run lint",
     "commit": "git-cz",
     "prepush": "CI=test npm test",
     "flow": "flow",
+    "lint": "eslint . --fix",
     "report-coverage": "cat ./coverage/lcov.info | codecov"
   },
   "repository": {
@@ -151,14 +152,31 @@
     ]
   },
   "eslintConfig": {
+    "parser": "babel-eslint",
     "extends": "airbnb",
     "rules": {
-      "func-names": [
-        "error",
-        "never"
-      ]
+      "react/require-default-props": "off",
+      "max-len": ["error", { "code": 160 }],
+      "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+      "comma-dangle": "off"
+    },
+    "globals": {
+      "expect": false,
+      "it": false,
+      "describe": false,
+      "beforeAll": false,
+      "beforeEach": false,
+      "window": false,
+      "document": false
     }
   },
+  "eslintIgnore": [
+    "coverage/*",
+    "config/*",
+    "flow-typed/*",
+    "scripts/*",
+    "build/*"
+  ],
   "release": {
     "getLastRelease": "last-release-git"
   }

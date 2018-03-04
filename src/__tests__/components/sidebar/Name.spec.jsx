@@ -13,21 +13,21 @@ describe('Name', () => {
   });
 
   it('should render without props', () => {
-    component = shallow(<Name/>);
+    component = shallow(<Name />);
     expect(component.exists()).toEqual(true);
     expect(component.contains(TEST_TITLE)).toEqual(false);
     expect(component.contains(TEST_NAME)).toEqual(false);
   });
 
   it('should render with title', () => {
-    component = shallow(<Name title={TEST_TITLE}/>);
+    component = shallow(<Name title={TEST_TITLE} />);
     expect(component.exists()).toEqual(true);
     expect(component.contains(TEST_TITLE)).toEqual(true);
     expect(component.contains(TEST_NAME)).toEqual(false);
   });
 
   it('should render with title, name', () => {
-    component = shallow(<Name title={TEST_TITLE} name={TEST_NAME}/>);
+    component = shallow(<Name title={TEST_TITLE} name={TEST_NAME} />);
     expect(component.exists()).toEqual(true);
     expect(component.contains(TEST_TITLE)).toEqual(true);
     expect(component.contains(TEST_NAME)).toEqual(true);

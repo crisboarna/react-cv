@@ -14,51 +14,46 @@ type Props = {
 const renderExperience = function renderExperience(props : Object) {
   if (props.experience) {
     return (<Category {...props.experience} />);
-  } else {
-    return null;
   }
+  return null;
 };
 
 const renderProjects = function renderProjects(props : Object) {
   if (props.projects) {
     return (<Category {...props.projects} />);
-  } else {
-    return null;
   }
+  return null;
 };
 
 const renderProfile = function renderProfile(props : Object) {
   if (props.profile) {
-    const {title, description, icon} = props.profile;
+    const { title, description, icon } = props.profile;
     return (
       <Section className="summary-section" title={title || 'Profile'} icon={icon || 'user'}>
         <p>{description}</p>
       </Section>
     );
-  } else {
-    return null;
   }
+  return null;
 };
 
-const CV = (props : Props) => {
-  return (
-      <div className="wrapper a4page" id={'overallPage'}>
-        <Sidebar {...props.sidebar}/>
-        <div className="main-wrapper">
-          {renderProfile(props)}
-          {renderExperience(props)}
-          <div className={'pageSpacing'}></div>
-          {renderProjects(props)}
-        </div>
-      </div>
-  );
-};
+const CV = (props : Props) => (
+  <div className="wrapper a4page" id="overallPage">
+    <Sidebar {...props.sidebar} />
+    <div className="main-wrapper">
+      {renderProfile(props)}
+      {renderExperience(props)}
+      <div className="pageSpacing" />
+      {renderProjects(props)}
+    </div>
+  </div>
+);
 
 export default CV;
 
 CV.propTypes = {
-  sidebar: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
-  experience: PropTypes.object.isRequired,
-  projects: PropTypes.object.isRequired,
+  sidebar: PropTypes.shape.isRequired,
+  profile: PropTypes.shape.isRequired,
+  experience: PropTypes.shape.isRequired,
+  projects: PropTypes.shape.isRequired,
 };

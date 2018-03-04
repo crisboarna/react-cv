@@ -1,4 +1,4 @@
-import {HIDE_ANCHOR, SHOW_ANCHOR} from "../actions/anchorActions";
+import { HIDE_ANCHOR, SHOW_ANCHOR } from '../actions/anchorActions';
 
 const initialState = {
   anchorVisible: true,
@@ -9,14 +9,14 @@ export default (state = initialState, action) => {
     case HIDE_ANCHOR:
       return {
         ...state,
-        anchorVisible: false
+        anchorVisible: false,
       };
     case SHOW_ANCHOR:
       return {
         ...state,
-        anchorVisible: true
+        anchorVisible: true,
       };
     default:
-      return state
+      return state;
   }
-}
+};

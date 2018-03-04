@@ -1,3 +1,3 @@
 declare module 'prop-types' {
-  declare  module.exports: any;
+  declare module.exports: any;
 }

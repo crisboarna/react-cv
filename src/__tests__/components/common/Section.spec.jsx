@@ -1,5 +1,5 @@
 import React from 'react';
-import {configure, shallow } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Section from '../../../components/common/Section';
 
@@ -11,7 +11,7 @@ describe('Section', () => {
   const TEST_CHILDREN = 'TEST_CHILDREN';
 
   beforeAll(() => {
-    configure({adapter: new Adapter()});
+    configure({ adapter: new Adapter() });
   });
 
   describe('rendering', () => {
@@ -23,21 +23,21 @@ describe('Section', () => {
     });
 
     it('should render with className', () => {
-      component = shallow(<Section className={TEST_CLASS}/>);
+      component = shallow(<Section className={TEST_CLASS} />);
       expect(component.find('.section-title').length).toEqual(1);
       expect(component.find(`.${TEST_CLASS}`).length).toEqual(1);
       expect(component.find(`.${TEST_ICON}`).length).toEqual(0);
     });
 
     it('should render with className, icon', () => {
-      component = shallow(<Section className={TEST_CLASS} icon={TEST_ICON}/>);
+      component = shallow(<Section className={TEST_CLASS} icon={TEST_ICON} />);
       expect(component.find('.section-title').length).toEqual(1);
       expect(component.find(`.${TEST_CLASS}`).length).toEqual(1);
       expect(component.find(`.fa-${TEST_ICON}`).length).toEqual(1);
     });
 
     it('should render with className, icon, title', () => {
-      component = shallow(<Section className={TEST_CLASS} icon={TEST_ICON} title={TEST_DESCRIPTION}/>);
+      component = shallow(<Section className={TEST_CLASS} icon={TEST_ICON} title={TEST_DESCRIPTION} />);
       expect(component.find('.section-title').length).toEqual(1);
       expect(component.find(`.${TEST_CLASS}`).length).toEqual(1);
       expect(component.find(`.fa-${TEST_ICON}`).length).toEqual(1);

@@ -1,25 +1,23 @@
-import { createStore, compose } from 'redux'
-import rootReducer from './reducers'
+import { createStore, compose } from 'redux';
+import rootReducer from './reducers';
 
 const initialState = {};
 const enhancers = [];
 
 if (process.env.NODE_ENV === 'development') {
-  const devToolsExtension = window.devToolsExtension;
+  const { devToolsExtension } = window;
 
   if (typeof devToolsExtension === 'function') {
-    enhancers.push(devToolsExtension())
+    enhancers.push(devToolsExtension());
   }
 }
 
-const composedEnhancers = compose(
-  ...enhancers
-);
+const composedEnhancers = compose(...enhancers);
 
 const store = createStore(
   rootReducer,
   initialState,
-  composedEnhancers
+  composedEnhancers,
 );
 
 export default store;

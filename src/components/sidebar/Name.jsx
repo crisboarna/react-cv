@@ -7,14 +7,12 @@ type Props = {
   title ?: string
 };
 
-const Name = ({name, title} : Props) => {
-    return (
-      <div className="name-container">
-        <h1 className="name" style={{ fontSize: 25 }}>{ name }</h1>
-        <h3 className="tagline"> { title } </h3>
-      </div>
-    );
-};
+const Name = ({ name, title } : Props) => (
+  <div className="name-container">
+    <h1 className="name" style={{ fontSize: 25 }}>{ name }</h1>
+    <h3 className="tagline"> { title } </h3>
+  </div>
+);
 
 export default Name;
 

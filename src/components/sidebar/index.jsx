@@ -1,6 +1,7 @@
+// @flow
+/* eslint react/no-unused-prop-types: "off" */
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import Name from './Name';
 import Contact from './Contact';
 import Education from './Education';
@@ -26,36 +27,33 @@ const componentMap = {
   languages: Languages,
   interests: Interests,
   certifications: Certifications,
-  skills: Skills
+  skills: Skills,
 };
 
-const renderSidebarCategory = function renderSidebarCategory(key : string, value : Object) {
-  if(key !== 'children') {
+const renderSidebarCategory = function renderSidebarCategory(key : string, value : any) {
+  if (key !== 'children') {
     const Component = componentMap[key];
     return (
-      <div key={key}><Component {...value}/></div>
+      <div key={key}><Component {...value} /></div>
     );
-  } else {
-    return null;
   }
+  return null;
 };
 
-const Sidebar = (props : Props) => {
-  return (
-    <div className="sidebar-wrapper">
-      {Object.entries(props).map(([key, value]) => renderSidebarCategory(key, value))}
-    </div>
-  );
-};
+const Sidebar = (props : Props) => (
+  <div className="sidebar-wrapper">
+    {Object.entries(props).map(([key, value]) => renderSidebarCategory(key, value))}
+  </div>
+);
 
 export default Sidebar;
 
 Sidebar.propTypes = {
-  name: PropTypes.object,
-  contact: PropTypes.object,
-  education: PropTypes.object,
-  languages: PropTypes.object,
-  interests: PropTypes.object,
-  certifications: PropTypes.object,
-  skills: PropTypes.object
+  name: PropTypes.shape,
+  contact: PropTypes.shape,
+  education: PropTypes.shape,
+  languages: PropTypes.shape,
+  interests: PropTypes.shape,
+  certifications: PropTypes.shape,
+  skills: PropTypes.shape,
 };

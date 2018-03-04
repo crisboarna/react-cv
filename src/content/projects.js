@@ -1,3 +1,5 @@
+/* eslint max-len: "off" */
+
 const projects = {
   title: 'Projects',
   icon: 'archive',
@@ -15,8 +17,8 @@ const projects = {
       description: [
         'NodeJS AWS Lambda conversational bot with latency based routing via AWS Route53',
         'Extracts and stores daily payloads on S3 with metadata on DynamoDB due to Alexa HTTPS endpoint limitation',
-        'Stores interaction data for conversational linking between sessions on DynamoDB'
-      ]
+        'Stores interaction data for conversational linking between sessions on DynamoDB',
+      ],
     },
     {
       title: 'National Geographic Messenger Chat Bot',
@@ -27,7 +29,7 @@ const projects = {
         'lambda',
         'api gateway',
         'api.ai',
-        'nlp'
+        'nlp',
       ],
       description: [
         'Used API.AI for NLP processing and extraction of user intent',
@@ -40,11 +42,11 @@ const projects = {
       tags: [
         'reactnative',
         'redux',
-        'thunk'
+        'thunk',
       ],
       description: [
         'Created ReactNative application for checking of all crypto coins with notifications',
-      ]
+      ],
     },
     {
       title: 'ReactJS Skillbars & ReactJS Scroll-Element',
@@ -52,13 +54,13 @@ const projects = {
       subtitleLink: 'https://www.npmjs.com/package/react-skillbars',
       tags: [
         'reactjs',
-        'es7'
+        'es7',
       ],
       description: [
         'Developed and published on NPM ReactJS components for skill-bars and scroll navigation',
         'TDD approach resulting in 100% test coverage and hundreds of downloads of modules',
-        'Wrote adhering to ES7 specification in order to familiarize myself with standard'
-      ]
+        'Wrote adhering to ES7 specification in order to familiarize myself with standard',
+      ],
     },
     {
       title: 'Synapse Enhancer',
@@ -69,14 +71,14 @@ const projects = {
         'api gateway',
         'ecs',
         'aws neptune',
-        'reactnative'
+        'reactnative',
       ],
       description: [
         'Creating full stack application to represent linked data with an oriented graph of any chosen subject matter for research & revision via browser or native applications in ReactNative',
         'Horizontally scalable through combined usage of AWS ECS Docker for website and AWS Lambda for service workers',
         'Storing structured data with newly announced AWS Neptune graph database',
-        'Progressive Web App website being done in ReactJS'
-      ]
+        'Progressive Web App website being done in ReactJS',
+      ],
     },
     {
       title: 'Augmented Reality Terminal',
@@ -87,15 +89,15 @@ const projects = {
         'opencv',
         'computer vision',
         'sockets',
-        'collision'
+        'collision',
       ],
       description: [
         'Created software framework with OpenCV and C++ to provide advanced HCI by using hand gestures to manipulate digital artifacts with web camera and computer vision algorithmic techniques',
         'Implemented 3D environment through Irrlicht and C++ with networking and physics for engaging collaboration between multiple remote users in a synchronized environment',
-        'Developed in agile manner with the use of personal Jira instance for issues and stories'
-      ]
-    }
-  ]
+        'Developed in agile manner with the use of personal Jira instance for issues and stories',
+      ],
+    },
+  ],
 };
 
 export default projects;

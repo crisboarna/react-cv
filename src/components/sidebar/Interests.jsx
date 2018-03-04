@@ -16,24 +16,23 @@ const renderInterest = function renderInterest(item : Object) {
   );
 };
 
-const Interests = ({title, list} : Props) => {
-  return (
-    <div className="languages-container container-block">
-      <h2 className="container-block-title">
-        <i className='fas fa-exclamation' />
-        {' '}
-        {title}</h2>
-      <ul className="list-unstyled interests-list">
-        {list && list.constructor === Array ? list.map((item) => renderInterest(item)) : null }
-      </ul>
-    </div>
-  );
-};
+const Interests = ({ title, list } : Props) => (
+  <div className="languages-container container-block">
+    <h2 className="container-block-title">
+      <i className="fas fa-exclamation" />
+      {' '}
+      {title}
+    </h2>
+    <ul className="list-unstyled interests-list">
+      {list && list.constructor === Array ? list.map(item => renderInterest(item)) : null }
+    </ul>
+  </div>
+);
 
 export default Interests;
 
 Interests.propTypes = {
   list: PropTypes.arrayOf(PropTypes.object).isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
 };
 

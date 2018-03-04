@@ -2,9 +2,9 @@ import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CV from '../../components/CV';
-import Sidebar from "../../components/sidebar/index";
-import Category from "../../components/common/Category";
-import Section from "../../components/common/Section";
+import Sidebar from '../../components/sidebar/index';
+import Category from '../../components/common/Category.jsx';
+import Section from '../../components/common/Section';
 
 
 describe('CV', () => {
@@ -21,14 +21,14 @@ describe('CV', () => {
 
   describe('rendering', () => {
     it('should render without crashing', () => {
-      component = shallow(<CV></CV>);
+      component = shallow(<CV />);
       expect(component.exists()).toEqual(true);
       expect(component.find(Sidebar).length).toEqual(1);
       expect(component.find(Category).length).toEqual(0);
     });
 
     it('should render given empty props', () => {
-      component = shallow(<CV profile={emptyProps} experience={emptyProps} projects={emptyProps} sidebar={emptyProps}></CV>);
+      component = shallow(<CV profile={emptyProps} experience={emptyProps} projects={emptyProps} sidebar={emptyProps} />);
       expect(component.exists()).toEqual(true);
       expect(component.find(Sidebar).length).toEqual(1);
       expect(component.find(Category).length).toEqual(2);
@@ -36,7 +36,7 @@ describe('CV', () => {
     });
 
     it('should render experience category', () => {
-      component = shallow(<CV experience={experienceProps}></CV>);
+      component = shallow(<CV experience={experienceProps} />);
       expect(component.find(Category).length).toEqual(1);
     });
 
@@ -44,7 +44,7 @@ describe('CV', () => {
       const allProfileProps = { title: TEST_TITLE, icon: TEST_ICON, description: TEST_DESCRIPTION };
 
       it('should render default profile', () => {
-        component = shallow(<CV profile={emptyProps}/>);
+        component = shallow(<CV profile={emptyProps} />);
         expect(component.find(Section).length).toEqual(1);
         expect(component.find(Section).prop('title')).toEqual('Profile');
         expect(component.find(Section).prop('icon')).toEqual('user');
@@ -52,8 +52,8 @@ describe('CV', () => {
       });
 
       it('should render with provided title', () => {
-        const titleProps = { title: TEST_TITLE};
-        component = shallow(<CV profile={titleProps}/>);
+        const titleProps = { title: TEST_TITLE };
+        component = shallow(<CV profile={titleProps} />);
         expect(component.find(Section).length).toEqual(1);
         expect(component.find(Section).prop('title')).toEqual(TEST_TITLE);
         expect(component.find(Section).prop('icon')).toEqual('user');
@@ -61,8 +61,8 @@ describe('CV', () => {
       });
 
       it('should render with provided title, icon', () => {
-        const titleProps = { title: TEST_TITLE, icon: TEST_ICON};
-        component = shallow(<CV profile={titleProps}/>);
+        const titleProps = { title: TEST_TITLE, icon: TEST_ICON };
+        component = shallow(<CV profile={titleProps} />);
         expect(component.find(Section).length).toEqual(1);
         expect(component.find(Section).prop('title')).toEqual(TEST_TITLE);
         expect(component.find(Section).prop('icon')).toEqual(TEST_ICON);
@@ -70,7 +70,7 @@ describe('CV', () => {
       });
 
       it('should render full profile', () => {
-        component = shallow(<CV profile={allProfileProps}></CV>);
+        component = shallow(<CV profile={allProfileProps} />);
         expect(component.find(Category).length).toEqual(0);
         expect(component.find(Section).length).toEqual(1);
         expect(component.find(Section).prop('title')).toEqual(TEST_TITLE);

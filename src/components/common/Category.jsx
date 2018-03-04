@@ -1,7 +1,8 @@
+// @flow
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Section from './Section';
-import {connect} from "react-redux";
 
 type Props = {
   title ?: string,
@@ -11,23 +12,21 @@ type Props = {
 };
 
 const renderTags = function renderTags(tags : Array<string>) {
-  if(tags) {
+  if (tags) {
     return (
-      <ul className={'keywords'}>
+      <ul className="keywords">
         {tags.map(tag => <li key={tag}>{tag}</li>)}
       </ul>
     );
-  } else {
-    return null;
   }
+  return null;
 };
 
 const renderHeaderAnchors = function renderHeaderAnchors(title : string, link : string, anchorVisible : boolean) {
-  if(anchorVisible) {
-    return <a href={link} className={'headerAnchor'} target="_blank">{title}</a>
-  } else {
-    return title;
+  if (anchorVisible) {
+    return <a href={link} className="headerAnchor" target="_blank">{title}</a>;
   }
+  return title;
 };
 
 const renderHeaderSection = function renderHeaderSection(title : string, link : string, description : string, tags : Array<string>, anchorVisible : boolean) {
@@ -39,9 +38,8 @@ const renderHeaderSection = function renderHeaderSection(title : string, link : 
         {description}
       </div>
     );
-  } else {
-    return null;
   }
+  return null;
 };
 
 const renderCategory = function renderCategory(item : Object, i : number, anchorVisible : boolean) {
@@ -56,7 +54,7 @@ const renderCategory = function renderCategory(item : Object, i : number, anchor
       </div>
       <div className="details">
         { item.description && item.description.constructor === Array ?
-          item.description.map((entry, i) => {return (<p key={`${item.subtitleDetail}_${i}`}>{`· ${entry}`}</p>)})
+          item.description.map(entry => (<p key={`${entry.substr(0, 10)}`}>{`· ${entry}`}</p>))
           : null
         }
       </div>
@@ -65,27 +63,29 @@ const renderCategory = function renderCategory(item : Object, i : number, anchor
 };
 
 const Category = (props : Props) => {
-  const { title, list, icon, anchorVisible} = props;
+  const {
+    title, list, icon, anchorVisible,
+  } = props;
   return (
     <Section className="category-section" icon={icon || 'briefcase'} title={title || 'Category'}>
-      {list && list.constructor === Array ? list.map((item, i) => renderCategory(item, i, anchorVisible)): null}
+      {list && list.constructor === Array ? list.map((item, i) => renderCategory(item, i, anchorVisible)) : null}
     </Section>
   );
 };
 
 const mapStateToProps = state => ({
-  anchorVisible: state.anchorVisibility.anchorVisible
+  anchorVisible: state.anchorVisibility.anchorVisible,
 });
 
 export default connect(
   mapStateToProps,
-  null
+  null,
 )(Category);
 
 Category.propTypes = {
   list: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired,
   icon: PropTypes.string,
-  anchorVisible: PropTypes.boolean
+  anchorVisible: PropTypes.boolean,
 };
 

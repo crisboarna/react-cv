@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 type Props = {
@@ -7,21 +7,20 @@ type Props = {
   className ?: string,
   icon ?: string,
   title ?: string,
-  children ?: Object
+  children ?: React.Node
 };
 
-const Section = (props : Props) => {
-  return (
-    <section className={`section ${props.className || ''}`} id={props.id}>
-      <header><h2 className="section-title">
+const Section = (props : Props) => (
+  <section className={`section ${props.className || ''}`} id={props.id}>
+    <header>
+      <h2 className="section-title">
         <i className={`fa fa-${props.icon || 'user'}`} />
         { props.title }
       </h2>
-      </header>
-      { props.children }
-    </section>
-  );
-};
+    </header>
+    { props.children }
+  </section>
+);
 
 export default Section;
 
@@ -30,5 +29,5 @@ Section.propTypes = {
   title: PropTypes.string,
   icon: PropTypes.string,
   children: PropTypes.node,
-  id: PropTypes.string
+  id: PropTypes.string,
 };
