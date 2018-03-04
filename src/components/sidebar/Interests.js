@@ -2,6 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+type Props = {
+  title : string,
+  list: Array<Object>
+};
+
 const renderInterest = function renderInterest(item : Object) {
   return (
     <li key={`${item.name}`}>
@@ -26,11 +31,6 @@ const Interests = ({title, list} : Props) => {
 };
 
 export default Interests;
-
-type Props = {
-  title : string,
-  list: Array<Object>
-};
 
 Interests.propTypes = {
   list: PropTypes.arrayOf(PropTypes.object).isRequired,

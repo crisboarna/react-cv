@@ -2,6 +2,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+type Props = {
+  id ?: string,
+  className ?: string,
+  icon ?: string,
+  title ?: string,
+  children ?: Object
+};
+
 const Section = (props : Props) => {
   return (
     <section className={`section ${props.className || ''}`} id={props.id}>
@@ -16,14 +24,6 @@ const Section = (props : Props) => {
 };
 
 export default Section;
-
-type Props = {
-  id ?: string,
-  className ?: string,
-  icon ?: string,
-  title ?: string,
-  children ?: Object
-};
 
 Section.propTypes = {
   className: PropTypes.string,

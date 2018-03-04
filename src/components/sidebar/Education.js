@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+type Props = {
+  title : string,
+  list : Array<Object>
+};
+
 const renderEducation = function renderEducation(item : string, i : number) {
   return (
     <div className="item" key={`education_item_${i}`}>
@@ -26,11 +31,6 @@ const Education = ({title, list} : Props) => {
 };
 
 export default Education;
-
-type Props = {
-  title : string,
-  list : Array<Object>
-};
 
 Education.propTypes = {
   list: PropTypes.arrayOf(PropTypes.shape()).isRequired,

@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+type Props = {
+  title ?: string,
+  list ?: Array<Object>
+};
+
 const renderCertification = function renderCertification(item : Object) {
   return (
     <li key={item.name}>
@@ -26,10 +31,6 @@ const Certifications = ({list, title} : Props) => {
 
 export default Certifications;
 
-type Props = {
-  title ?: string,
-  list ?: Array<Object>
-};
 
 Certifications.propTypes = {
   list: PropTypes.array.isRequired,

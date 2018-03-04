@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './styles/styles.css';
 import CV from './CV';
 import Data from './content';
 import Export from './components/util/Export';

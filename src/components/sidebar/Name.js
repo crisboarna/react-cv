@@ -2,6 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+type Props = {
+  name ?: string,
+  title ?: string
+};
+
 const Name = ({name, title} : Props) => {
     return (
       <div className="name-container">
@@ -12,11 +17,6 @@ const Name = ({name, title} : Props) => {
 };
 
 export default Name;
-
-type Props = {
-  name ?: string,
-  title ?: string
-};
 
 Name.propTypes = {
   name: PropTypes.string.isRequired,

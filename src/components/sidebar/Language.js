@@ -2,6 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+type Props = {
+  title ?: string,
+  list ?: Object
+};
+
 const renderLanguage = function renderLanguage(item : Object, i : number) {
   return (
     <li key={`language_item_${i}`}>
@@ -27,11 +32,6 @@ const Language = ({title, list} : Props) => {
 };
 
 export default Language;
-
-type Props = {
-  title ?: string,
-  list ?: Object
-};
 
 Language.propTypes = {
   list: PropTypes.arrayOf(PropTypes.shape()).isRequired,

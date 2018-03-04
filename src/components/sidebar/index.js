@@ -9,6 +9,16 @@ import Interests from './Interests';
 import Certifications from './Certifications';
 import Skills from './Skills';
 
+type Props = {
+  name ?: Object,
+  contact ?: Object,
+  education ?: Object,
+  languages ?: Object,
+  interests ?: Object,
+  certifications ?: Object,
+  skills ?: Object
+}
+
 const componentMap = {
   name: Name,
   contact: Contact,
@@ -39,16 +49,6 @@ const Sidebar = (props : Props) => {
 };
 
 export default Sidebar;
-
-type Props = {
-  name ?: Object,
-  contact ?: Object,
-  education ?: Object,
-  languages ?: Object,
-  interests ?: Object,
-  certifications ?: Object,
-  skills ?: Object
-}
 
 Sidebar.propTypes = {
   name: PropTypes.object,

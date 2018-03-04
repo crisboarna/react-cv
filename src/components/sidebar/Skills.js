@@ -2,6 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+type Props = {
+  title ?: string,
+  list ?: {[string] : Array<string>}
+};
+
 const getKeyUpercase = function getKeyUpercase(string : string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
@@ -31,11 +36,6 @@ const Skills = ({title, list} : Props) => {
 };
 
 export default Skills;
-
-type Props = {
-  title ?: string,
-  list ?: {[string] : Array<string>}
-};
 
 Skills.propTypes = {
   list: PropTypes.object.isRequired,

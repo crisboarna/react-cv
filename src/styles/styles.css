@@ -15,7 +15,9 @@ h5,
 h6 {
   font-weight: 700;
 }
+
 a {
+  text-decoration: none;
   color: #2d7788;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
@@ -26,13 +28,27 @@ a:hover {
   text-decoration: underline;
   color: #1a454f;
 }
+
 a:focus {
   text-decoration: none;
 }
+
 p {
   line-height: 1.5;
   margin: 0 0 10px;
 }
+
+dl,ol,ul {
+  margin-top: 0
+}
+
+button {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit
+}
+
 .wrapper {
   background: #42A8C0;
   max-width: 960px;
@@ -164,7 +180,7 @@ p {
 }
 
 .sidebar-wrapper .skills-container {
-  margin-top: 180px;
+  margin-top: 240px;
 }
 
 .sidebar-wrapper .skills-container .lang-desc {
@@ -195,7 +211,7 @@ p {
 }
 .main-wrapper .section-title .fa {
   width: 30px;
-  height: 30px;
+  height: 25px;
   margin-right: 8px;
   display: inline-block;
   color: #fff;
@@ -285,7 +301,7 @@ p {
 }
 
 .pageSpacing {
-  margin-top: 115px
+  margin-top: 140px
 }
 
 .main-wrapper .keywords {
@@ -298,8 +314,8 @@ p {
 
 .main-wrapper .keywords li {
   display: inline-block;
-  margin: 2px 2px 2px 0;
-  padding: 4px 5px 5px;
+  margin: 0px 2px 2px 0px;
+  padding: 3px 5px 5px;
   font-size: 9.5px;
   line-height: 1;
   text-transform: lowercase;
@@ -311,4 +327,9 @@ p {
 
 .main-wrapper .keywords li:hover {
   background: #dfeaf0;
+}
+
+.list-inline,.list-unstyled {
+  padding-left: 0;
+  list-style: none
 }

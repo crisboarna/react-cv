@@ -2,6 +2,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+type Props = {
+  email ?: Object,
+  phone ?: Object,
+  website ?: Object,
+  linkedin ?: Object,
+  github ?: Object,
+  npm ?: Object
+}
+
 const renderContactInfo = function renderContactInfo(key : string, entry : any) {
   if(key !== 'children' && entry.constructor === Object) {
     let href;
@@ -38,15 +47,6 @@ const Contact = (props : Props) => {
 };
 
 export default Contact;
-
-type Props = {
-  email ?: Object,
-  phone ?: Object,
-  website ?: Object,
-  linkedin ?: Object,
-  github ?: Object,
-  npm ?: Object
-}
 
 Contact.propTypes = {
   email: PropTypes.object,

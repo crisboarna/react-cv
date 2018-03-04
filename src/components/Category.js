@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Section from './Section';
 
+type Props = {
+  title ?: string,
+  icon ?: string,
+  list ?: Array<Object>
+};
+
 const renderTags = function renderTags(tags : Array<string>) {
   if(tags) {
     return (
@@ -59,12 +65,6 @@ const Category = (props : Props) => {
 };
 
 export default Category;
-
-type Props = {
-  title ?: string,
-  icon ?: string,
-  list ?: Array<Object>
-};
 
 Category.propTypes = {
   list: PropTypes.arrayOf(PropTypes.object).isRequired,

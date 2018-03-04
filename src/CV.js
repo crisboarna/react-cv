@@ -1,11 +1,15 @@
 // @flow
 import React from 'react';
 import PropTypes from 'prop-types';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/styles.css';
 import Section from './components/Section';
 import Sidebar from './components/sidebar';
 import Category from './components/Category';
+
+type Props = {
+  sidebar ?: Object,
+  profile ?: Object,
+  projects ?: Object
+};
 
 const renderExperience = function renderExperience(props : Object) {
   if (props.experience) {
@@ -51,12 +55,6 @@ const CV = (props : Props) => {
 };
 
 export default CV;
-
-type Props = {
-  sidebar ?: Object,
-  profile ?: Object,
-  projects ?: Object
-};
 
 CV.propTypes = {
   sidebar: PropTypes.object.isRequired,
