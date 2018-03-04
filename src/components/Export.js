@@ -1,8 +1,12 @@
 import React from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { hideAnchors, showAnchors } from "../actions/anchorActions";
 
-const printPDF = function printPDF() {
+const printPDF = function printPDF(hideAnchors, showAnchors) {
+  hideAnchors();
   const page = document.getElementById('overallPage');
   html2canvas(page)
     .then(canvas => {
@@ -27,16 +31,25 @@ const printPDF = function printPDF() {
         heightLeft -= pageHeight;
       }
       doc.save('CV Cristian Boarna.pdf');
+      showAnchors();
     });
 };
 
-const Export = ({children}) => {
+const Export = ({ hideAnchors, showAnchors, children}) => {
   return (
     <div>
-      <button onClick={printPDF}>Download PDF</button>
+      <button onClick={() => printPDF(hideAnchors, showAnchors)}>Download PDF</button>
       {children}
     </div>
   );
 };
 
-export default Export;
+const mapDispatchToProps = dispatch => bindActionCreators({
+  hideAnchors,
+  showAnchors
+}, dispatch);
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Export);

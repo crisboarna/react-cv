@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Section from './Section';
+import {connect} from "react-redux";
 
 type Props = {
   title ?: string,
   icon ?: string,
-  list ?: Array<Object>
+  list ?: Array<Object>,
+  anchorVisible : boolean
 };
 
 const renderTags = function renderTags(tags : Array<string>) {
@@ -16,17 +18,24 @@ const renderTags = function renderTags(tags : Array<string>) {
       </ul>
     );
   } else {
-    console.log('no tags');
     return null;
   }
 };
 
-const renderHeaderSection = function renderHeaderSection(title : string, link : string, description : string, tags : Array<string>) {
+const renderHeaderAnchors = function renderHeaderAnchors(title : string, link : string, anchorVisible : boolean) {
+  if(anchorVisible) {
+    return <a href={link} className={'headerAnchor'} target="_blank">{title}</a>
+  } else {
+    return title;
+  }
+};
+
+const renderHeaderSection = function renderHeaderSection(title : string, link : string, description : string, tags : Array<string>, anchorVisible : boolean) {
   if (title || tags) {
     return (
       <div className="header">
         {renderTags(tags)}
-        <a href={link} target="_blank">{title}</a>
+        {renderHeaderAnchors(title, link, anchorVisible)}
         {description}
       </div>
     );
@@ -35,7 +44,7 @@ const renderHeaderSection = function renderHeaderSection(title : string, link : 
   }
 };
 
-const renderCategory = function renderCategory(item : Object, i : number) {
+const renderCategory = function renderCategory(item : Object, i : number, anchorVisible : boolean) {
   return (
     <div className="item" key={`exp_item_${i}`}>
       <div className="meta">
@@ -43,7 +52,7 @@ const renderCategory = function renderCategory(item : Object, i : number) {
           <h3 className="job-title">{item.title}</h3>
           <div className="time">{item.date}</div>
         </div>
-        {renderHeaderSection(item.subtitle, item.subtitleLink, item.subtitleDetail, item.tags)}
+        {renderHeaderSection(item.subtitle, item.subtitleLink, item.subtitleDetail, item.tags, anchorVisible)}
       </div>
       <div className="details">
         { item.description && item.description.constructor === Array ?
@@ -56,19 +65,27 @@ const renderCategory = function renderCategory(item : Object, i : number) {
 };
 
 const Category = (props : Props) => {
-  const { title, list, icon } = props;
+  const { title, list, icon, anchorVisible} = props;
   return (
     <Section className="category-section" icon={icon || 'briefcase'} title={title || 'Category'}>
-      {list && list.constructor === Array ? list.map((item, i) => renderCategory(item, i)): null}
+      {list && list.constructor === Array ? list.map((item, i) => renderCategory(item, i, anchorVisible)): null}
     </Section>
   );
 };
 
-export default Category;
+const mapStateToProps = state => ({
+  anchorVisible: state.anchorVisibility.anchorVisible
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(Category);
 
 Category.propTypes = {
   list: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired,
-  icon: PropTypes.string
+  icon: PropTypes.string,
+  anchorVisible: PropTypes.boolean
 };
 

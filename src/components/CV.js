@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
 import PropTypes from 'prop-types';
-import Section from './components/Section';
-import Sidebar from './components/sidebar';
-import Category from './components/Category';
+import Section from './common/Section';
+import Sidebar from './sidebar/index';
+import Category from './common/Category';
 
 type Props = {
   sidebar ?: Object,
   profile ?: Object,
-  projects ?: Object
+  projects ?: Object,
 };
 
 const renderExperience = function renderExperience(props : Object) {

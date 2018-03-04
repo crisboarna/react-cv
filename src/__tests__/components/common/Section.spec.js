@@ -1,7 +1,7 @@
 import React from 'react';
 import {configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Section from '../../components/Section';
+import Section from '../../../components/common/Section';
 
 describe('Section', () => {
   let component;

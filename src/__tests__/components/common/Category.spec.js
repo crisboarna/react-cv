@@ -1,8 +1,9 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
+import configureStore from 'redux-mock-store';
 import Adapter from 'enzyme-adapter-react-16';
-import Category from '../../components/Category';
-import Section from "../../components/Section";
+import Category from '../../../components/common/Category';
+import Section from "../../../components/common/Section";
 
 describe('Category', () => {
   let component;
@@ -19,64 +20,85 @@ describe('Category', () => {
   const TEST_TAG2 = 'TEST_TAG2';
   const TEST_TAGS = [TEST_TAG1, TEST_TAG2];
   const TEST_LIST = [{title: TEST_TITLE, date: TEST_DATE, subtitle: TEST_SUBTITLE, subtitleLink: TEST_SUBTITLE_LINK, subtitleDetail: TEST_SUBTITLE_DETAIL }];
+  let store;
+  const mockStore = configureStore();
 
   beforeAll(() => {
     configure({ adapter: new Adapter() });
   });
 
+  beforeEach(()=>{
+    store = mockStore({anchorVisibility:{anchorVisible:true}});
+  });
+
   it('should render without crashing', () => {
-    component = shallow(<Category />);
+    component = shallow(<Category store={store} />).dive();
     expect(component.exists()).toEqual(true);
     expect(component.find(Section).prop('title')).toEqual('Category');
     expect(component.find(Section).prop('icon')).toEqual('briefcase');
     expect(component.find('.item').length).toEqual(0);
+    expect(component.find('.headerAnchor').length).toEqual(0);
   });
 
   it('should render with given title, default icon', () => {
-    component = shallow(<Category title={TEST_TITLE}/>);
+    component = shallow(<Category store={store} title={TEST_TITLE}/>).dive();
     expect(component.find(Section).prop('title')).toEqual(TEST_TITLE);
     expect(component.find(Section).prop('icon')).toEqual('briefcase');
     expect(component.find('.item').length).toEqual(0);
+    expect(component.find('.headerAnchor').length).toEqual(0);
   });
 
   it('should render with given title and icon', () => {
-    component = shallow(<Category title={TEST_TITLE} icon={TEST_ICON}/>);
+    component = shallow(<Category store={store} title={TEST_TITLE} icon={TEST_ICON}/>).dive();
     expect(component.find(Section).prop('title')).toEqual(TEST_TITLE);
     expect(component.find(Section).prop('icon')).toEqual(TEST_ICON);
     expect(component.find('.item').length).toEqual(0);
+    expect(component.find('.headerAnchor').length).toEqual(0);
   });
 
   it('should render with given title, icon, empty list', () => {
-    component = shallow(<Category title={TEST_TITLE} icon={TEST_ICON} list={[]}/>);
+    component = shallow(<Category store={store} title={TEST_TITLE} icon={TEST_ICON} list={[]}/>).dive();
     expect(component.find(Section).prop('title')).toEqual(TEST_TITLE);
     expect(component.find(Section).prop('icon')).toEqual(TEST_ICON);
     expect(component.find('.item').length).toEqual(0);
+    expect(component.find('.headerAnchor').length).toEqual(0);
+  });
+
+  it('should render without anchor', () => {
+    component = shallow(<Category store={store} title={TEST_TITLE} icon={TEST_ICON} list={[]}/>).dive();
+    expect(component.find(Section).prop('title')).toEqual(TEST_TITLE);
+    expect(component.find(Section).prop('icon')).toEqual(TEST_ICON);
+    expect(component.find('.item').length).toEqual(0);
+    expect(component.find('.headerAnchor').length).toEqual(0);
   });
 
   it('should render with given title, icon, list with no description, tags', () => {
-    component = shallow(<Category title={TEST_TITLE} icon={TEST_ICON} list={TEST_LIST}/>);
+    component = shallow(<Category store={store} title={TEST_TITLE} icon={TEST_ICON} list={TEST_LIST}/>).dive();
     expect(component.find(Section).prop('title')).toEqual(TEST_TITLE);
     expect(component.find(Section).prop('icon')).toEqual(TEST_ICON);
     expect(component.find('.item').length).toEqual(1);
     expect(component.find('.header').length).toEqual(1);
     expect(component.contains(TEST_SUBTITLE)).toEqual(true);
+    expect(component.find('.headerAnchor').length).toEqual(1);
     expect(component.contains(TEST_DATE)).toEqual(true);
+    expect(component.find('.headerAnchor').length).toEqual(1);
   });
 
   it('should render with given icon, list with no subtitle, description, tags', () => {
     const TEST_LIST = [{title: TEST_TITLE, date: TEST_DATE, subtitleLink: TEST_SUBTITLE_LINK, subtitleDetail: TEST_SUBTITLE_DETAIL }];
-    component = shallow(<Category title={TEST_TITLE} icon={TEST_ICON} list={TEST_LIST}/>);
+    component = shallow(<Category store={store} title={TEST_TITLE} icon={TEST_ICON} list={TEST_LIST}/>).dive();
     expect(component.find(Section).prop('title')).toEqual(TEST_TITLE);
     expect(component.find(Section).prop('icon')).toEqual(TEST_ICON);
     expect(component.find('.item').length).toEqual(1);
     expect(component.find('.header').length).toEqual(0);
     expect(component.contains(TEST_SUBTITLE)).toEqual(false);
     expect(component.contains(TEST_DATE)).toEqual(true);
+    expect(component.find('.headerAnchor').length).toEqual(0);
   });
 
   it('should render with given icon, list, description and no tags', () => {
     const TEST_LIST = [{title: TEST_TITLE, date: TEST_DATE, subtitleLink: TEST_SUBTITLE_LINK, subtitleDetail: TEST_SUBTITLE_DETAIL, description: TEST_DESCRIPTION}];
-    component = shallow(<Category title={TEST_TITLE} icon={TEST_ICON} list={TEST_LIST}/>);
+    component = shallow(<Category store={store} title={TEST_TITLE} icon={TEST_ICON} list={TEST_LIST}/>).dive();
     expect(component.find(Section).prop('title')).toEqual(TEST_TITLE);
     expect(component.find(Section).prop('icon')).toEqual(TEST_ICON);
     expect(component.find('.item').length).toEqual(1);
@@ -86,11 +108,12 @@ describe('Category', () => {
     expect(component.contains(TEST_DATE)).toEqual(true);
     expect(component.contains(`· ${TEST_DESCRIPTION1}`)).toEqual(true);
     expect(component.contains(`· ${TEST_DESCRIPTION2}`)).toEqual(true);
+    expect(component.find('.headerAnchor').length).toEqual(0);
   });
 
   it('should render with given icon, list, description, tags', () => {
     const TEST_LIST = [{title: TEST_TITLE, date: TEST_DATE, subtitleLink: TEST_SUBTITLE_LINK, subtitleDetail: TEST_SUBTITLE_DETAIL, description: TEST_DESCRIPTION, tags: TEST_TAGS}];
-    component = shallow(<Category title={TEST_TITLE} icon={TEST_ICON} list={TEST_LIST}/>);
+    component = shallow(<Category store={store} title={TEST_TITLE} icon={TEST_ICON} list={TEST_LIST}/>).dive();
     expect(component.find(Section).prop('title')).toEqual(TEST_TITLE);
     expect(component.find(Section).prop('icon')).toEqual(TEST_ICON);
     expect(component.find('.item').length).toEqual(1);
@@ -102,5 +125,18 @@ describe('Category', () => {
     expect(component.contains(`· ${TEST_DESCRIPTION2}`)).toEqual(true);
     expect(component.contains(TEST_TAG1)).toEqual(true);
     expect(component.contains(TEST_TAG2)).toEqual(true);
+    expect(component.find('.headerAnchor').length).toEqual(1);
+  });
+
+  it('should not render anchor', () => {
+    store = mockStore({anchorVisibility:{anchorVisible:false}});
+    component = shallow(<Category store={store} title={TEST_TITLE} icon={TEST_ICON} list={TEST_LIST}/>).dive();
+    expect(component.find(Section).prop('title')).toEqual(TEST_TITLE);
+    expect(component.find(Section).prop('icon')).toEqual(TEST_ICON);
+    expect(component.find('.item').length).toEqual(1);
+    expect(component.find('.header').length).toEqual(1);
+    expect(component.contains(TEST_SUBTITLE)).toEqual(true);
+    expect(component.find('.headerAnchor').length).toEqual(0);
+    expect(component.contains(TEST_DATE)).toEqual(true);
   });
 });

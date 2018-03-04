@@ -1,10 +1,10 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import CV from '../CV';
-import Sidebar from "../components/sidebar";
-import Category from "../components/Category";
-import Section from "../components/Section";
+import CV from '../../components/CV';
+import Sidebar from "../../components/sidebar/index";
+import Category from "../../components/common/Category";
+import Section from "../../components/common/Section";
 
 
 describe('CV', () => {

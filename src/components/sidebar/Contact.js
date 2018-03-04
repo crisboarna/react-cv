@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from "react-redux";
 
 type Props = {
   email ?: Object,
@@ -8,10 +9,25 @@ type Props = {
   website ?: Object,
   linkedin ?: Object,
   github ?: Object,
-  npm ?: Object
+  npm ?: Object,
+  anchorVisible : number
 }
 
-const renderContactInfo = function renderContactInfo(key : string, entry : any) {
+const renderContactAnchors = function renderContactAnchors(visible, href, entry) {
+  if(visible) {
+    return (
+      <a className={'contactAnchor'} href={`//${href}`} target="_blank">
+        {entry.value}
+      </a>
+    )
+  } else {
+    return (
+      entry.value
+    )
+  }
+};
+
+const renderContactInfo = function renderContactInfo(key : string, entry : any, anchorVisible : number) {
   if(key !== 'children' && entry.constructor === Object) {
     let href;
     switch (key) {
@@ -28,7 +44,7 @@ const renderContactInfo = function renderContactInfo(key : string, entry : any) 
     return (
       <li key={key}>
         <i className={entry.icon}/>
-        <a href={`//${href}`} target="_blank"> {entry.value} </a>
+        {renderContactAnchors(anchorVisible, href, entry)}
       </li>
     );
   } else {
@@ -39,14 +55,22 @@ const renderContactInfo = function renderContactInfo(key : string, entry : any) 
 const Contact = (props : Props) => {
   return (
     <div className="contact-container container-block">
-    <ul className="list-unstyled contact-list">
-      {Object.entries(props).map(([key, entry]) => renderContactInfo(key, entry))}
-    </ul>
-  </div>
+      {props.anchorVisible.toString()}
+      <ul className="list-unstyled contact-list">
+        {Object.entries(props).map(([key, entry]) => renderContactInfo(key, entry, props.anchorVisible))}
+      </ul>
+    </div>
   );
 };
 
-export default Contact;
+const mapStateToProps = state => ({
+  anchorVisible: state.anchorVisibility.anchorVisible
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(Contact);
 
 Contact.propTypes = {
   email: PropTypes.object,
@@ -54,5 +78,6 @@ Contact.propTypes = {
   website: PropTypes.object,
   linkedin: PropTypes.object,
   github: PropTypes.object,
-  npm: PropTypes.object
+  npm: PropTypes.object,
+  anchorVisible: PropTypes.number
 };
