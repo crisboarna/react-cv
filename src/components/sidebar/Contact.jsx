@@ -53,7 +53,6 @@ const renderContactInfo = function renderContactInfo(key : string, entry : any, 
 
 const Contact = (props : Props) => (
   <div className="contact-container container-block">
-    {props.anchorVisible.toString()}
     <ul className="list-unstyled contact-list">
       {Object.entries(props).map(([key, entry]) => renderContactInfo(key, entry, props.anchorVisible))}
     </ul>
