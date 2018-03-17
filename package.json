@@ -75,7 +75,7 @@
     "last-release-git": "0.0.3",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
-    "postcss-loader": "2.0.8",
+    "postcss-loader": "2.1.2",
     "promise": "8.0.1",
     "prop-types": "^15.6.0",
     "raf": "3.4.0",
