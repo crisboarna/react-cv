@@ -1,0 +1,13 @@
+# do not run Prettier against JavaScript files
+# in "snapshots/" folders
+**/snapshots/*.js
+
+# Ignore artifacts:
+build/
+coverage/
+node_modules/
+package.json
+package-lock.json
+*.d.ts
+*.md
+.github
