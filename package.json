@@ -1,6 +1,6 @@
 {
   "name": "react-cv",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "private": true,
   "repository": {
@@ -110,20 +110,19 @@
       [
         "@semantic-release/npm",
         {
-          "npmPublish": false,
-          "tarballDir": "dist"
+          "npmPublish": false
         }
       ],
       [
         "@semantic-release/github",
         {
-          "assets": "dist/*"
+          "assets": "react-cv-*.tgz"
         }
       ]
     ],
     "branches": [
       "+([0-9])?(.{+([0-9]),x}).x",
-      "main",
+      "master",
       "next",
       "next-major",
       {

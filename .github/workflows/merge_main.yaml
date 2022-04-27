@@ -115,7 +115,7 @@ jobs:
           ENV: ${{ secrets.AWS_CDK_ENV }}
 
       - name: 🚀 Deploy Exporter
-        run: nx deploy:exporter infra
+        run: yarn run nx deploy:exporter infra
         env:
           AWS_CDK_ACCOUNT: ${{ secrets.AWS_CDK_ACCOUNT }}
           AWS_CDK_REGION: ${{ secrets.AWS_CDK_REGION }}
@@ -123,12 +123,17 @@ jobs:
           ENV: ${{ secrets.AWS_CDK_ENV }}
 
       - name: 🚀 Deploy Web
-        run: nx deploy:web infra
+        run: yarn run nx deploy:web infra
         env:
           AWS_CDK_ACCOUNT: ${{ secrets.AWS_CDK_ACCOUNT }}
           AWS_CDK_REGION: ${{ secrets.AWS_CDK_REGION }}
           AWS_CDK_DOMAIN_NAME: ${{ secrets.AWS_CDK_DOMAIN_NAME }}
           ENV: ${{ secrets.AWS_CDK_ENV }}
+
+      - name: 🚀 Release
+        run: yarn release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   post-verify:
     runs-on: ubuntu-20.04
