@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import Cv from './CV';
+import CV from './cv';
 
 describe('CV', () => {
   const TEST_ICON = 'TEST_ICON';
@@ -10,18 +10,18 @@ describe('CV', () => {
 
   describe('rendering', () => {
     it('should render without crashing', () => {
-      const { queryAllByTestId } = render(<Cv />);
+      const { queryAllByTestId } = render(<CV />);
       expect(queryAllByTestId('cv/root').length).toEqual(1);
       expect(queryAllByTestId('section/header-title').length).toEqual(0);
     });
 
     it('should render given empty props', () => {
       const { queryAllByTestId } = render(
-        <Cv
-          profile={emptyProps}
-          experience={emptyProps}
-          projects={emptyProps}
-          sidebar={emptyProps}
+        <CV
+          profile={emptyProps as any}
+          experience={emptyProps as any}
+          projects={emptyProps as any}
+          sidebar={emptyProps as any}
         />
       );
       expect(queryAllByTestId('cv/root').length).toEqual(1);
@@ -30,7 +30,7 @@ describe('CV', () => {
 
     it('should render experience category', () => {
       const { queryAllByTestId, getByTestId } = render(
-        <Cv experience={experienceProps} />
+        <CV experience={experienceProps as any} />
       );
       expect(queryAllByTestId('cv/root').length).toEqual(1);
       expect(getByTestId('section/header-title').textContent).toEqual(
@@ -47,7 +47,7 @@ describe('CV', () => {
 
       it('should render default profile', () => {
         const { queryAllByTestId, getByTestId } = render(
-          <Cv profile={emptyProps} />
+          <CV profile={emptyProps as any} />
         );
         expect(queryAllByTestId('cv/root').length).toEqual(1);
         expect(getByTestId('section/header-title').textContent).toEqual(
@@ -58,7 +58,7 @@ describe('CV', () => {
       it('should render with provided title', () => {
         const titleProps = { title: TEST_TITLE };
         const { queryAllByTestId, getByTestId } = render(
-          <Cv profile={titleProps} />
+          <CV profile={titleProps as any} />
         );
         expect(queryAllByTestId('cv/root').length).toEqual(1);
         expect(getByTestId('section/header-title').textContent).toEqual(
@@ -69,7 +69,7 @@ describe('CV', () => {
       it('should render with provided title, icon', () => {
         const titleProps = { title: TEST_TITLE, icon: TEST_ICON };
         const { queryAllByTestId, getByTestId } = render(
-          <Cv profile={titleProps} />
+          <CV profile={titleProps as any} />
         );
         expect(queryAllByTestId('cv/root').length).toEqual(1);
         expect(getByTestId('section/header-title').textContent).toEqual(
@@ -79,7 +79,7 @@ describe('CV', () => {
 
       it('should render full profile', () => {
         const { queryAllByTestId, getByTestId } = render(
-          <Cv profile={allProfileProps} />
+          <CV profile={allProfileProps} />
         );
         expect(queryAllByTestId('cv/root').length).toEqual(1);
         expect(getByTestId('section/header-title').textContent).toEqual(
