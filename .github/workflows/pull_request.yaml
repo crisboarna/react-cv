@@ -1,0 +1,45 @@
+name: pull_request
+
+on:
+  pull_request:
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/head/main/' || github.run_number }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
+jobs:
+  verify:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 5
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v3
+
+      - name: 🧰 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: 📦 Install Dependencies
+        run: yarn install
+
+      - name: ✨ Linting
+        run: yarn lint
+        env:
+          AWS_ACCOUNT: 123
+          AWS_REGION: us-east-1
+          AWS_DOMAIN_NAME: test.com
+          ENV: test
+
+      - name: 🧪 Tests
+        run: yarn test
+
+      - name: 🏗️ Build
+        run: yarn build
+        env:
+          AWS_CDK_ACCOUNT: 123
+          AWS_CDK_REGION: us-east-1
+          AWS_CDK_DOMAIN_NAME: test.com
+          ENV: test

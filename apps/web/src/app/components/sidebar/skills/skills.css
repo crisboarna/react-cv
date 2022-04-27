@@ -1,0 +1,19 @@
+.sidebar-wrapper .skills-container {
+  margin-top: 10px;
+}
+
+.sidebar-wrapper.skills-container .lang-desc {
+  color: rgba(255, 255, 255, 0.6);
+}
+.sidebar-wrapper .skills-list {
+  margin-bottom: 0;
+}
+.sidebar-wrapper .skills-list li {
+  margin-bottom: 10px;
+}
+.sidebar-wrapper .skills-list li:last-child {
+  margin-bottom: 0;
+}
+.sidebar-wrapper .skills-list li .lang-desc-details {
+  color: rgba(255, 255, 255, 0.6);
+}

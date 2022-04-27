@@ -1,0 +1,17 @@
+.sidebar-wrapper .contact-list li {
+  margin-bottom: 15px;
+}
+
+.sidebar-wrapper .contact-list .contactAnchor {
+  text-decoration: underline;
+}
+
+.sidebar-wrapper .contact-list li:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-contact-icons {
+  margin-right: 5px;
+  font-size: 18px;
+  vertical-align: middle;
+}

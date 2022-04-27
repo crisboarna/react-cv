@@ -1,0 +1,120 @@
+name: merge_main
+
+on:
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/head/main/' || github.run_number }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
+jobs:
+  verify:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 5
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v3
+
+      - name: 🧰 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: 💽 Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: 📦 Install Dependencies
+        run: yarn install
+
+      - name: ✨ Linting
+        run: yarn lint
+        env:
+          AWS_CDK_ACCOUNT: ${{ secrets.AWS_CDK_ACCOUNT }}
+          AWS_CDK_REGION: ${{ secrets.AWS_CDK_REGION }}
+          AWS_CDK_DOMAIN_NAME: ${{ secrets.AWS_CDK_DOMAIN_NAME }}
+          ENV: ${{ secrets.AWS_CDK_ENV }}
+
+      - name: 🧪 Tests
+        run: yarn test
+
+      - name: 📊 Code Coverage
+        uses: codecov/codecov-action@v2
+        with:
+          directory: ./coverage
+          flags: unittests
+          fail_ci_if_error: true
+
+  deploy:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 5
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v3
+
+      - name: 🧰 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: 📦 Install Dependencies
+        run: yarn install
+
+      - name: 🏗️ Build
+        run: yarn build
+        env:
+          AWS_CDK_ACCOUNT: ${{ secrets.AWS_CDK_ACCOUNT }}
+          AWS_CDK_REGION: ${{ secrets.AWS_CDK_REGION }}
+          AWS_CDK_DOMAIN_NAME: ${{ secrets.AWS_CDK_DOMAIN_NAME }}
+          ENV: ${{ secrets.AWS_CDK_ENV }}
+
+      - name: 🔑 Decode AWS CDK Context
+        uses: timheuer/base64-to-file@v1.1
+        with:
+          fileName: 'cdk.context.json'
+          encodedString: ${{ secrets.AWS_CDK_CONTEXT }}
+
+      - name: 🔑 AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_CDK_ROLE_GITHUB }}
+          role-session-name: react-cv-deploy
+
+      - name: 🚀 Deploy Exporter
+        run: nx deploy:exporter infra
+        env:
+          AWS_CDK_ACCOUNT: ${{ secrets.AWS_CDK_ACCOUNT }}
+          AWS_CDK_REGION: ${{ secrets.AWS_CDK_REGION }}
+          AWS_CDK_DOMAIN_NAME: ${{ secrets.AWS_CDK_DOMAIN_NAME }}
+          ENV: ${{ secrets.AWS_CDK_ENV }}
+
+      - name: 🚀 Deploy Web
+        run: nx deploy:web infra
+        env:
+          AWS_CDK_ACCOUNT: ${{ secrets.AWS_CDK_ACCOUNT }}
+          AWS_CDK_REGION: ${{ secrets.AWS_CDK_REGION }}
+          AWS_CDK_DOMAIN_NAME: ${{ secrets.AWS_CDK_DOMAIN_NAME }}
+          ENV: ${{ secrets.AWS_CDK_ENV }}
+
+  post-verify:
+    runs-on: ubuntu-20.04
+    if: ${{ failure() }}
+    needs:
+      - verify
+    steps:
+      - name: ❌ Cancel Workflow
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.actions.cancelWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.runId
+            })
+

@@ -1,0 +1,17 @@
+.sidebar-wrapper .profile {
+  margin-bottom: 15px;
+}
+
+.sidebar-wrapper .name-container {
+  padding: 29px;
+  background: rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: #fff;
+}
+
+.sidebar-wrapper .name {
+  font-size: 32px;
+  font-weight: 900;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
