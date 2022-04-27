@@ -32,6 +32,12 @@ jobs:
       - name: 📦 Install Dependencies
         run: yarn install
 
+      - name: 🔑 Decode AWS CDK Context
+        uses: timheuer/base64-to-file@v1.1
+        with:
+          fileName: 'cdk.context.json'
+          encodedString: ${{ secrets.AWS_CDK_CONTEXT }}
+
       - name: ✨ Linting
         run: yarn lint
         env:
