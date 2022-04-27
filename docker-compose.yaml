@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  localstack:
+    image: localstack/localstack:0.14.2
+    container_name: localstack_aws
+    ports:
+      - "4567-4584:4567-4584"
+      - "${PORT_WEB_UI-8082}:${PORT_WEB_UI-8082}"
+    environment:
+      - SERVICES=serverless,sqs,s3,lambda,logs
+      - DEBUG=1
+      - EDGE_PORT=4566
+      - DATA_DIR=${DATA_DIR- }
+      - PORT_WEB_UI=${PORT_WEB_UI- }
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"

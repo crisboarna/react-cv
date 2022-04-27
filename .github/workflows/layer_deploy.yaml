@@ -1,0 +1,51 @@
+name: merge_main
+
+on:
+  workflow_dispatch
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/head/main/' || github.run_number }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 5
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v3
+
+      - name: 🔑 Decode AWS CDK Context
+        uses: timheuer/base64-to-file@v1.1
+        with:
+          fileName: 'cdk.context.json'
+          encodedString: ${{ secrets.AWS_CDK_CONTEXT }}
+
+      - name: 🔑 AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-session-name: react-cv-deploy
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_GITHUB }}
+
+      - name: 🧰 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: 💽 Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: 📦 Install Dependencies
+        run: yarn install
+
+      - name: 🚀 Deploy Layer
+        run: nx deploy:layer infra

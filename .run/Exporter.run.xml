@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Exporter" type="NodeJSConfigurationType" node-parameters="-r ts-node/register -r dotenv/config" path-to-js-file="apps/exporter/src/local.ts" working-dir="$PROJECT_DIR$">
+    <envs>
+      <env name="TS_NODE_PROJECT" value="apps/exporter/tsconfig.app.json" />
+      <env name="AWS_PROFILE" value="c_dev" />
+    </envs>
+    <method v="2" />
+  </configuration>
+</component>

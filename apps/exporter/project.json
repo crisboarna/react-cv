@@ -1,0 +1,47 @@
+{
+  "root": "apps/exporter",
+  "sourceRoot": "apps/exporter/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/exporter",
+        "main": "apps/exporter/src/main.ts",
+        "tsConfig": "apps/exporter/tsconfig.app.json",
+        "externalDependencies": ["chrome-aws-lambda","puppeteer-core","aws-sdk"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "exporter:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/exporter/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/exporter"],
+      "options": {
+        "jestConfig": "apps/exporter/jest.config.js",
+        "passWithNoTests": true,
+        "codeCoverage": true
+      }
+    }
+  },
+  "tags": []
+}
