@@ -31,7 +31,7 @@ jobs:
       - name: 🔑 AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: ${{ secrets.AWS_CDK_REGION }}
           role-to-assume: ${{ secrets.AWS_CDK_ROLE_GITHUB }}
           role-session-name: react-cv-deploy
 
