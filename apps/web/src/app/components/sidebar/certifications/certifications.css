@@ -1,0 +1,10 @@
+.sidebar-wrapper .certification-container .time {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+
+.certification-icon {
+  padding-right: 5px;
+  font-size: 15px;
+}

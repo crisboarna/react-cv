@@ -1,0 +1,36 @@
+/*.sidebar-wrapper .education-container .item {*/
+/*  margin-bottom: 15px;*/
+/*}*/
+
+.sidebar-wrapper .education-container .item:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-wrapper .education-container .meta {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  margin-bottom: 0px;
+  margin-top: 0;
+  font-size: 14px;
+}
+
+.sidebar-wrapper .education-container .time {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+
+.sidebar-wrapper .education-container .icon {
+  margin-right: 5px;
+}
+
+.sidebar-wrapper .education .degree {
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 5px;
+
+}
+
+.sidebar-wrapper .education-container .courses {
+  padding-top: 10px;
+}
