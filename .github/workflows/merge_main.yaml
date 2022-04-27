@@ -29,14 +29,21 @@ jobs:
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
-      - name: 📦 Install Dependencies
-        run: yarn install
-
       - name: 🔑 Decode AWS CDK Context
         uses: timheuer/base64-to-file@v1.1
         with:
           fileName: 'cdk.context.json'
           encodedString: ${{ secrets.AWS_CDK_CONTEXT }}
+
+      - name: 🔑 AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_CDK_ROLE_GITHUB }}
+          role-session-name: react-cv-deploy
+
+      - name: 📦 Install Dependencies
+        run: yarn install
 
       - name: ✨ Linting
         run: yarn lint
@@ -68,17 +75,6 @@ jobs:
         with:
           node-version: '16'
 
-      - name: 📦 Install Dependencies
-        run: yarn install
-
-      - name: 🏗️ Build
-        run: yarn build
-        env:
-          AWS_CDK_ACCOUNT: ${{ secrets.AWS_CDK_ACCOUNT }}
-          AWS_CDK_REGION: ${{ secrets.AWS_CDK_REGION }}
-          AWS_CDK_DOMAIN_NAME: ${{ secrets.AWS_CDK_DOMAIN_NAME }}
-          ENV: ${{ secrets.AWS_CDK_ENV }}
-
       - name: 🔑 Decode AWS CDK Context
         uses: timheuer/base64-to-file@v1.1
         with:
@@ -91,6 +87,24 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_CDK_ROLE_GITHUB }}
           role-session-name: react-cv-deploy
+
+      - name: 💽 Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: 📦 Install Dependencies
+        run: yarn install
+
+      - name: 🏗️ Build
+        run: yarn build
+        env:
+          AWS_CDK_ACCOUNT: ${{ secrets.AWS_CDK_ACCOUNT }}
+          AWS_CDK_REGION: ${{ secrets.AWS_CDK_REGION }}
+          AWS_CDK_DOMAIN_NAME: ${{ secrets.AWS_CDK_DOMAIN_NAME }}
+          ENV: ${{ secrets.AWS_CDK_ENV }}
 
       - name: 🚀 Deploy Exporter
         run: nx deploy:exporter infra
