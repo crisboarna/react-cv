@@ -16,20 +16,20 @@
   <a href="https://github.com/crisboarna/react-cv/issues">
     <img src="https://img.shields.io/github/issues/crisboarna/react-cv.svg">
   </a>
-  <a href="http://opensource.org/licenses/MIT">
+  <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/github/license/crisboarna/react-cv">
   </a>
   <a href="https://github.com/semantic-release/semantic-release">
     <img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)">
   </a>
-  <a href="http://commitizen.github.io/cz-cli/">
+  <a href="https://commitizen.github.io/cz-cli/">
     <img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square">
   </a>
     <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" >
   <a href="https://github.com/crisboarna">
     <img src="https://img.shields.io/badge/made%20by-crisboarna-blue.svg" >
   </a>
-  <a href="https://github.com/crisboarna/aws-cdk-lib-util/pulls">
+  <a href="https://github.com/crisboarna/react-cv/pulls">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat">
   </a>
   <img src="./docs/images/header.png" width="100%">
