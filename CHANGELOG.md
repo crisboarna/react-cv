@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/crisboarna/react-cv/compare/v1.0.0...v1.1.0) (2022-09-27)
+
+
+### Features
+
+* **cv:** added new entry ([9a85001](https://github.com/crisboarna/react-cv/commit/9a85001194adb5667ab819c48dfbc44e01c01092))
+* **cv:** updated icon with personal logo ([c27bea7](https://github.com/crisboarna/react-cv/commit/c27bea76018c7b03589b07981b18382fdc56577b))
+
 # 1.0.0 (2022-04-27)
 
 
