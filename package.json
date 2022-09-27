@@ -67,7 +67,7 @@
     "@types/react-dom": "18.0.0",
     "@typescript-eslint/eslint-plugin": "~5.18.0",
     "@typescript-eslint/parser": "~5.18.0",
-    "aws-cdk": "^2.20.0",
+    "aws-cdk": "^2.43.1",
     "aws-cdk-lib": "2.20.0",
     "aws-cdk-lib-util": "^1.1.2",
     "aws-cdk-local": "^2.15.0",
