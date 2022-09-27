@@ -6,6 +6,24 @@ const experience: CategoryProps = {
   description: '',
   list: [
     {
+      title: 'Senior Research Engineer',
+      subtitle: 'LG Electronics - via Arnia',
+      subtitleLink: 'https://www.lg.com',
+      date: 'February 2022 - Present',
+      tags: [
+        'c++',
+        'webrtc',
+        'python',
+        'cmake',
+        'docker',
+        'electron',
+      ],
+      description: [
+        'Creating cross-platform native conferencing application in C++ with focus on WebRTC network stack and UNIX socket cross-module communication.',
+        'Guided cross disciplinary team on integrating modules reducing UNIX TCP sockets network chatter by 55% as tracked by cAdvisor.'
+      ],
+    },
+    {
       title: 'Team Lead',
       subtitle: 'Collinson Group - via Arnia',
       subtitleLink: 'https://www.collinsongroup.com/',
@@ -77,7 +95,7 @@ const experience: CategoryProps = {
       ],
     },
     {
-      title: 'Cloud Software Engineer',
+      title: 'Software Engineer',
       subtitle: 'Cahootsy',
       date: 'July 2017 - March 2018',
       tags: [
@@ -104,7 +122,6 @@ const experience: CategoryProps = {
       description: [
         "Consolidated streaming of real-time pricing data to 100's of downstream systems via a low latency asynchronous graph based distributed aggregation system in Java Spring",
         'Reduced by 65% testing time of strategic logic by creating generic Cucumber test generator',
-        'Set code quality standards via Kubernetes based ETL job on top of code build data in ELK',
       ],
     },
     {

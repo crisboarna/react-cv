@@ -1,11 +1,15 @@
 .main-wrapper .category-section .item {
-  margin-bottom: 27px;
+  margin-bottom: 26px;
 }
 
 .main-wrapper .category-section .item:last-child {
-  margin-bottom: 23.5px;
+  margin-bottom: 20px;
 }
 
 .main-wrapper .category-section .item {
-  margin-bottom: 27px;
+  margin-bottom: 25px;
+}
+
+.main-wrapper .category-section .item-gap {
+  margin-top: 32px;
 }

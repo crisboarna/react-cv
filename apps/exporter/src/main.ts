@@ -7,6 +7,7 @@ import {
 import { S3 } from 'aws-sdk';
 
 const PARAM_URL = 'CV_URL';
+// process.env[PARAM_URL]='localhost:4200';
 
 export const handler: Handler<
   CloudFormationCustomResourceEvent,
@@ -60,6 +61,7 @@ export const handler: Handler<
     });
     console.log('Extracted pdf');
 
+    // fs.writeFileSync("test.pdf",pdf, 'binary');
     await s3Client
       .putObject({
         Bucket: url,

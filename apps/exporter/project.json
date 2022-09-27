@@ -8,7 +8,7 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/exporter",
-        "main": "apps/exporter/src/main.ts",
+        "main": "apps/exporter/src/local.ts",
         "tsConfig": "apps/exporter/tsconfig.app.json",
         "externalDependencies": ["chrome-aws-lambda","puppeteer-core","aws-sdk"]
       },

@@ -9,7 +9,7 @@ const sidebar: SidebarProps = {
     email: { value: 'contact@crisboarna.com', icon: 'fas fa-envelope' },
     phone: { value: '+40 775 263 532', icon: 'fas fa-phone' },
     website: { value: 'crisboarna.com', icon: 'fas fa-globe' },
-    blog: { value: 'crisboarna.com/blog', icon: 'fas fa-rss' },
+    blog: { value: 'blog.crisboarna.com', icon: 'fas fa-rss' },
     linkedin: { value: 'linkedin.com/in/crisboarna', icon: 'fab fa-linkedin' },
     github: { value: 'github.com/crisboarna', icon: 'fab fa-github' },
   },

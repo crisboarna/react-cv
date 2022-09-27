@@ -51,14 +51,6 @@ const projects: CategoryProps = {
       ],
     },
     {
-      title: 'Crypto Tracker',
-      subtitle: 'Mobile App',
-      tags: ['flutter', 'reactnative', 'redux', 'thunk'],
-      description: [
-        'Created Flutter/ReactNative application for checking of all crypto coins with notifications',
-      ],
-    },
-    {
       title: 'National Geographic Messenger Chat Bot',
       subtitle: 'Messenger Bot',
       tags: ['typescript', 'lambda', 'api gateway', 'nlp', 'route53'],
