@@ -142,10 +142,10 @@ jobs:
       - verify
     steps:
       - name: ❌ Cancel Workflow
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
           script: |
-            github.actions.cancelWorkflowRun({
+            github.rest.actions.cancelWorkflowRun({
               owner: context.repo.owner,
               repo: context.repo.repo,
               run_id: context.runId
