@@ -2248,6 +2248,13 @@
   dependencies:
     nx "14.7.16"
 
+"@nrwl/cli@14.8.1":
+  version "14.8.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-14.8.1.tgz#a5dda34ca32f746d1c5d744416f4b760e781129a"
+  integrity sha512-s2hKgfYXW77BFzpbm2zV5vb+L0Ke4G7tXXHAH6Y+OKBgMOKO8I0eceVF/tvQ1xNzwSBJSP7/pk1Bm6y1jx0V/Q==
+  dependencies:
+    nx "14.8.1"
+
 "@nrwl/cypress@13.10.2":
   version "13.10.2"
   resolved "https://registry.yarnpkg.com/@nrwl/cypress/-/cypress-13.10.2.tgz#4fc6383aa36d392bebfe6e512650f3d5f87ebad6"
@@ -2495,6 +2502,13 @@
   integrity sha512-Zad7N1E227TlTMvQJnCURp6xGUK3y45SOa0rEVby6vE2DcrX5rvHCFaSz/F+qIFIeU2YTvz7devASrJl3+ZIjQ==
   dependencies:
     nx "14.7.16"
+
+"@nrwl/tao@14.8.1":
+  version "14.8.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-14.8.1.tgz#48d24b148be134263d2d739f03e83462a83815c0"
+  integrity sha512-4HfYTollo0njRkFOhm94rmlI7Dra7OC53jMQu0LYc7hZ6rNhb1TVNlf1cu54bQaGs/EW9l0tlBJbWYV66NUX+g==
+  dependencies:
+    nx "14.8.1"
 
 "@nrwl/web@13.10.2":
   version "13.10.2"
@@ -10626,6 +10640,46 @@ nx@14.7.16:
   dependencies:
     "@nrwl/cli" "14.7.16"
     "@nrwl/tao" "14.7.16"
+    "@parcel/watcher" "2.0.4"
+    "@yarnpkg/lockfile" "^1.1.0"
+    "@yarnpkg/parsers" "^3.0.0-rc.18"
+    "@zkochan/js-yaml" "0.0.6"
+    chalk "4.1.0"
+    chokidar "^3.5.1"
+    cli-cursor "3.1.0"
+    cli-spinners "2.6.1"
+    cliui "^7.0.2"
+    dotenv "~10.0.0"
+    enquirer "~2.3.6"
+    fast-glob "3.2.7"
+    figures "3.2.0"
+    flat "^5.0.2"
+    fs-extra "^10.1.0"
+    glob "7.1.4"
+    ignore "^5.0.4"
+    js-yaml "4.1.0"
+    jsonc-parser "3.2.0"
+    minimatch "3.0.5"
+    npm-run-path "^4.0.1"
+    open "^8.4.0"
+    semver "7.3.4"
+    string-width "^4.2.3"
+    strong-log-transformer "^2.1.0"
+    tar-stream "~2.2.0"
+    tmp "~0.2.1"
+    tsconfig-paths "^3.9.0"
+    tslib "^2.3.0"
+    v8-compile-cache "2.3.0"
+    yargs "^17.4.0"
+    yargs-parser "21.0.1"
+
+nx@14.8.1:
+  version "14.8.1"
+  resolved "https://registry.yarnpkg.com/nx/-/nx-14.8.1.tgz#5e48deb067edd2fa9ec6518a751cd44c766d9875"
+  integrity sha512-9fDmK+W6HCOpNrGPllbYdAxpXCEhbSHrO3rWd9th/m393Rc12UrP+QvV8GR8uKOti8A8vSKIT2tQpME0Xf3Xww==
+  dependencies:
+    "@nrwl/cli" "14.8.1"
+    "@nrwl/tao" "14.8.1"
     "@parcel/watcher" "2.0.4"
     "@yarnpkg/lockfile" "^1.1.0"
     "@yarnpkg/parsers" "^3.0.0-rc.18"
