@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/crisboarna/react-cv/compare/v1.1.0...v1.2.0) (2022-11-07)
+
+
+### Features
+
+* **infra:** added response cors for main website ([1c11cf8](https://github.com/crisboarna/react-cv/commit/1c11cf825aff0e1e45c6e8e6c0f80a33d0b67bf1))
+
 # [1.1.0](https://github.com/crisboarna/react-cv/compare/v1.0.0...v1.1.0) (2022-09-27)
 
 
