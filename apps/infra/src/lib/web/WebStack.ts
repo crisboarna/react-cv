@@ -12,7 +12,7 @@ import {
   AllowedMethods,
   Distribution,
   HttpVersion,
-  OriginAccessIdentity,
+  OriginAccessIdentity, OriginRequestPolicy, ResponseHeadersPolicy,
   SecurityPolicyProtocol,
   ViewerProtocolPolicy,
 } from 'aws-cdk-lib/aws-cloudfront';
@@ -120,6 +120,18 @@ export class WebStack extends Stack {
       })
     );
 
+    const responseHeadersPolicy = new ResponseHeadersPolicy(this, `${projectName}-CDN-CV-ResponseHeadersPolicy-${stackEnv}`, {
+      responseHeadersPolicyName: `${projectName}-CDN-CV-ResponseHeadersPolicy-${stackEnv}`,
+      comment: 'Response headers policy for CV CDN',
+      corsBehavior: {
+        accessControlAllowCredentials: false,
+        accessControlAllowHeaders: ['*'],
+        accessControlAllowMethods: ['ALL'],
+        accessControlAllowOrigins: [`cv.${domainName}`, domainName, `web.dev.${domainName}`, `web.stg.${domainName}`],
+        originOverride: true
+      }
+    });
+
     const cdnDistribution = new Distribution(
       this,
       `${projectName}-CDN-${stackEnv}`,
@@ -140,10 +152,8 @@ export class WebStack extends Stack {
           allowedMethods: AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
           viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
           compress: true,
-          originRequestPolicy: {
-            //CORS-S3Origin
-            originRequestPolicyId: '88a5eaf4-2fd4-4709-b370-b4c650ea3fcf',
-          },
+          responseHeadersPolicy,
+          originRequestPolicy: OriginRequestPolicy.fromOriginRequestPolicyId(this,`${projectName}-CDN-ORP-${stackEnv}`,'88a5eaf4-2fd4-4709-b370-b4c650ea3fcf')
         },
         errorResponses: [
           {

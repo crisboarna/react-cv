@@ -69,7 +69,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-20.04
-    timeout-minutes: 5
+    timeout-minutes: 10
     permissions:
       id-token: write
       contents: write
