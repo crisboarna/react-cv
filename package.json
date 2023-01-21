@@ -31,7 +31,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "chrome-aws-lambda": "^10.1.0",
     "core-js": "^3.6.5",
-    "express": "4.17.2",
+    "express": "4.17.3",
     "puppeteer-core": "^13.5.2",
     "query-string": "^7.1.1",
     "react": "18.0.0",
