@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/crisboarna/react-cv/compare/v1.2.0...v1.2.1) (2023-01-21)
+
+
+### Bug Fixes
+
+* package.json & yarn.lock to reduce vulnerabilities ([1848f35](https://github.com/crisboarna/react-cv/commit/1848f35371493ab2af444d8ce06b18c73a546b14))
+
 # [1.2.0](https://github.com/crisboarna/react-cv/compare/v1.1.0...v1.2.0) (2022-11-07)
 
 
