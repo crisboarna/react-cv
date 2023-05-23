@@ -6,10 +6,31 @@ const experience: CategoryProps = {
   description: '',
   list: [
     {
+      title: 'Senior Software Engineer',
+      subtitle: 'Apsis.ai',
+      subtitleLink: 'https://apsis.ai',
+      date: 'February 2023 - Present',
+      tags: [
+        'python',
+        'ai',
+        'inference',
+        'machine learning',
+        'kubernetes',
+        'aws',
+        'eks',
+      ],
+      description: [
+        "Led the optimization of an AI inference pipeline for an AI platform. Creating a bespoke K8s operator to manage GPU RAM allocation for fleet of artificial neural network (ANN) workers.",
+        "57% reduction in E2E latency by optimizing architecture & code of the AI pipeline workflow.",
+        "Improved by 95% the pod scale out time via pre-warming of K8s PVC with model metadata.",
+        'Reduced by 94% the CI duration by optimizing the AI image & re-architecting CI/CD pipeline.'
+      ],
+    },
+    {
       title: 'Senior Research Engineer',
       subtitle: 'LG Electronics - via Arnia',
       subtitleLink: 'https://www.lg.com',
-      date: 'February 2022 - Present',
+      date: 'February 2022 - February 2023',
       tags: [
         'c++',
         'webrtc',
@@ -19,8 +40,8 @@ const experience: CategoryProps = {
         'electron',
       ],
       description: [
-        'Creating cross-platform native conferencing application in C++ with focus on WebRTC network stack and UNIX socket cross-module communication.',
-        'Guided cross disciplinary team on integrating modules reducing UNIX TCP sockets network chatter by 55% as tracked by cAdvisor.'
+        'Created cross-platform native conferencing application in C++ with focus on WebRTC network stack and UNIX socket cross-module communication.',
+        'Guided cross disciplinary team on integrating modules reducing UNIX TCP sockets network chatter by 55% as tracked by cAdvisor.',
       ],
     },
     {
@@ -28,19 +49,18 @@ const experience: CategoryProps = {
       subtitle: 'Collinson Group - via Arnia',
       subtitleLink: 'https://www.collinsongroup.com/',
       tags: [
-        'glue',
-        'kafka',
-        'redis',
-        'hadoop',
-        'step functions',
+        'typescript',
         'kubernetes',
-        's3',
+        'kafka',
         'reactjs',
+        'redis',
+        'glue',
+        'hadoop'
       ],
       description: [
-        "Led team of 4 in planning, architecting & delivering a serverless redemption platform with B2B & B2C API's on Lambda. Delivered on-time with  CMS backed white-label ReactJS web",
-        'Successfully  liased with multiple down-stream systems in integrating new proxy  wrapper breaking up Java monolith. Did this using Kafka, Docker, Typescript which allowed me also to create CI/CD that enabled daily releases from old quaterly release cadence',
-        'Designed and implemented plugin based API gateway used across department. This new integration with downstream vendors reduced  cross-team load by 17%',
+        "Led team of 4 in planning, architecting & delivering a serverless redemption platform with B2B & B2C API's on Lambda. Delivered on-time with CMS backed white-label ReactJS web.",
+        'Successfully liased with down-stream systems in integrating a new proxy wrapper to break up a Java monolith. Used Kafka, Docker & TS. Added CI that enabled daily release cadence.',
+        'Designed and implemented plugin based API Gateway internal service. This new integration with downstream vendors reduced  cross-team load by 17%.',
       ],
     },
     {
@@ -58,9 +78,9 @@ const experience: CategoryProps = {
         'cognito',
       ],
       description: [
-        'Created magic link sign in/up system rolled out across all company sites increasing customer sign-up completion journey by 32%',
-        'Setup event-driven ETL pipeline over of TB of customer S3 data lake in PySpark Hadoop. New real-time BI increased customer engagement by 11% through targeted offers',
-        'Cut down pharmacists load by 27% via new ReactJS & Go self-service portal for customers',
+        'Created magic link sign in/up system rolled out across all company sites increasing customer sign-up completion journey by 32%.',
+        'Setup event-driven ETL pipeline over of TB of customer S3 data lake in PySpark Hadoop. New real-time BI increased customer engagement by 11% through targeted offers.',
+        'Cut down pharmacists load by 27% via new ReactJS & Go self-service portal for customers.',
       ],
     },
     {
@@ -89,9 +109,9 @@ const experience: CategoryProps = {
         'Terraform',
       ],
       description: [
-        'Led team of 3 to create cluster based blockchain ledger platform. Developed on NodeJS, Kotlin & ReactJS running on ECS with self-checkout customer node expansion via Terraform',
-        'Delivered on time serverless platform digitizing manual tasks of foundation with 50+ clients. Bore responsibility for entire project from requirements, wireframes to coding',
-        'Managed & developed Workplace NLP bot as L1 support used by 250+ employees. Added ReactJS HR dashboard for human chat escalation, nominations & meeting room bookings',
+        'Led team of 3 to create cluster based blockchain ledger platform. Developed on NodeJS, Kotlin & ReactJS running on ECS with self-checkout customer node expansion via Terraform.',
+        'Led & delivered serverless platform digitizing manual tasks of foundation with 50+ clients.',
+        'Managed & developed Workplace NLP bot as L1 support used by 250+ employees. Added ReactJS HR dashboard for human chat escalation, nominations & meeting room bookings.',
       ],
     },
     {
@@ -109,7 +129,7 @@ const experience: CategoryProps = {
         'nlp',
       ],
       description: [
-        'Reduced by 90% existing 5 days serial error prone process via an event driven fault tolerant ETL. NLP datasets used to generate optimal targeted campaigns to reduce costs',
+        'Reduced by 90% existing 5 days serial error prone process via an event driven fault tolerant ETL. NLP datasets used to generate optimal targeted campaigns to reduce costs.',
       ],
     },
     {
@@ -120,8 +140,8 @@ const experience: CategoryProps = {
       date: 'September 2016 - July 2017',
       tags: ['java', 'spring', 'low-latency', 'docker', 'nodejs', 'kubernetes'],
       description: [
-        "Consolidated streaming of real-time pricing data to 100's of downstream systems via a low latency asynchronous graph based distributed aggregation system in Java Spring",
-        'Reduced by 65% testing time of strategic logic by creating generic Cucumber test generator',
+        "Consolidated streaming of real-time pricing data to 100's of downstream systems via a low latency asynchronous graph based distributed aggregation system in Java Spring.",
+        'Reduced by 65% testing time of strategic logic by creating generic Cucumber test generator.',
       ],
     },
     {
@@ -132,8 +152,8 @@ const experience: CategoryProps = {
       date: 'September 2015 - September 2016',
       tags: ['java', 'spring', 'low-latency', 'angularjs', 'nodejs'],
       description: [
-        'Successfully did fundamental architectural change to major project by replacing duplicate JSP pages with modular Angular web and observer, decorator, adapter based Java backend',
-        'Cut by 70% code duplication via a common shared library as measured in SonarQube',
+        'Successfully did fundamental architectural change to major project by replacing duplicate JSP pages with modular Angular web and observer, decorator, adapter based Java backend.',
+        'Cut by 70% code duplication via a common shared library as measured in SonarQube.',
       ],
     },
     {
@@ -144,7 +164,7 @@ const experience: CategoryProps = {
       date: 'June 2013 - June 2014',
       tags: ['java', 'python3', 'spring'],
       description: [
-        'Reduced team load by 95% on majority of daily tasks via Python and Java automation',
+        'Reduced team load by 95% on majority of daily tasks via Python and Java automation.',
       ],
     },
   ],

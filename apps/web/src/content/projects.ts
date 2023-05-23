@@ -18,6 +18,7 @@ const projects: CategoryProps = {
       title: 'Kortexo',
       subtitle: 'App',
       tags: [
+        'flutter',
         'typescript',
         'lambda',
         'api gateway',
@@ -25,13 +26,11 @@ const projects: CategoryProps = {
         'cognito',
         'cloudfront',
         's3',
-        'flutter',
       ],
       description: [
-        'Full stack platform to represent linked data with an oriented graph of any chosen subject matter for research & revision via browser or native mobile applications in Flutter',
-        'Messenger, Slack integration for reminders & mobile Flutter app for testing of knowledge',
-        'Horizontally scalable through combined usage of AWS ECS, Lambda for micro-services leveraging Cognito, Cloudwatch, DynamoDB, SQS, CloudFront, S3',
-        'PWA done in ReactJS for admins and Flutter Web for users leveraging Firebase',
+        'Full stack platform to view oriented graph linked data. Viewable in web & Flutter mobile app.',
+        'Messenger, Slack integration for reminders & mobile Flutter app for testing of knowledge.',
+        'PWA done in ReactJS for admins and Flutter Web for users leveraging Firebase.',
       ],
     },
     {
@@ -39,7 +38,7 @@ const projects: CategoryProps = {
       subtitle: 'Open Source Contributor',
       tags: ['flutter', 'dart', 'doctor'],
       description: [
-        'Added improvements to Flutter project platform engine and `flutter doctor` tool',
+        'Added improvements to Flutter project platform engine and `flutter doctor` tool.',
       ],
     },
     {
@@ -47,24 +46,24 @@ const projects: CategoryProps = {
       subtitle: 'Open Source Contributor',
       tags: ['kubernetes', 'go', 'networking', 'cli'],
       description: [
-        'Contributor across Kubernetes Open Source Project networking and cli SIGs',
+        'Contributor across Kubernetes Open Source Project networking and cli SIGs.',
       ],
     },
-    {
-      title: 'National Geographic Messenger Chat Bot',
-      subtitle: 'Messenger Bot',
-      tags: ['typescript', 'lambda', 'api gateway', 'nlp', 'route53'],
-      description: [
-        'NodeJS AWS Lambda chat bot with NLP processing and extraction of user intent',
-      ],
-    },
+    // {
+    //   title: 'National Geographic Messenger Chat Bot',
+    //   subtitle: 'Messenger Bot',
+    //   tags: ['typescript', 'lambda', 'api gateway', 'nlp', 'route53'],
+    //   description: [
+    //     'NodeJS AWS Lambda chat bot with NLP processing and extraction of user intent.',
+    //   ],
+    // },
     {
       title: 'Augmented Reality Terminal',
       subtitle: 'Desktop App',
       tags: ['c++', 'opencv', 'computer vision', 'sockets', 'collision'],
       description: [
-        'Created software framework with OpenCV and C++ to provide advanced HCI by using hand gestures manipulating digital artifacts with web camera and computer vision algorithms',
-        'Implemented 3D environment through Irrlicht and C++ with networking and physics for engaging collaboration between multiple remote users in a synchronized environment',
+        'Created software framework with OpenCV and C++ to provide advanced HCI by using hand gestures manipulating digital artifacts with web camera and computer vision algorithms.',
+        'Implemented 3D environment through Irrlicht and C++ with networking and physics for engaging collaboration between multiple remote users in a synchronized environment.',
       ],
     },
   ],
