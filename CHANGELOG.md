@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/crisboarna/react-cv/compare/v1.2.1...v1.3.0) (2023-05-23)
+
+
+### Features
+
+* **apsis:** added base apsis entry ([0c3cd43](https://github.com/crisboarna/react-cv/commit/0c3cd439e70c9016f2a5b64a4c89a845026fd746))
+
 ## [1.2.1](https://github.com/crisboarna/react-cv/compare/v1.2.0...v1.2.1) (2023-01-21)
 
 
