@@ -21,7 +21,7 @@ const Interests: FC<InterestProps> = ({ title, list }) => (
   >
     {
       /*// puppeteer does not take into account padding by itself when on next page*/
-      Array.from(Array(18)).map(() => (
+      Array.from(Array(12)).map(() => (
         <br />
       ))
     }

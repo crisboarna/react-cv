@@ -37,7 +37,7 @@ const Education: FC<EducationProps> = ({ title, list }) => (
   >
     {
       /*// puppeteer does not take into account padding by itself when on next page*/
-      Array.from(Array(13)).map(() => (
+      Array.from(Array(6)).map(() => (
         <br />
       ))
     }

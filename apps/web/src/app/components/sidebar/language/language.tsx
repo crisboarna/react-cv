@@ -19,6 +19,12 @@ const Language: FC<LanguageProps> = ({ title, list }) => (
     className="languages-container container-block"
     data-testid={'language/container'}
   >
+    {
+      /*// puppeteer does not take into account padding by itself when on next page*/
+      Array.from(Array(8)).map(() => (
+        <br />
+      ))
+    }
     <h2 className="container-block-title" key="lang_header">
       <i className="far fa-comment" data-testid={'language/icon'} /> {title}
     </h2>

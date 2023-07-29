@@ -100,14 +100,14 @@ const sidebar: SidebarProps = {
       },
     ],
   },
-  // languages: {
-  //   title: 'Languages',
-  //   list: [
-  //     { name: 'English', level: 'Native' },
-  //     { name: 'Romanian', level: 'Native' },
-  //     { name: 'French', level: 'Beginner' },
-  //   ],
-  // },
+  languages: {
+    title: 'Languages',
+    list: [
+      { name: 'English', level: 'Native - C2' },
+      { name: 'Romanian', level: 'Native - C2' },
+      { name: 'French', level: 'Beginner - A2' },
+    ],
+  },
   interests: {
     title: 'Interests',
     list: [
