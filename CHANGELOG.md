@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/crisboarna/react-cv/compare/v1.4.0...v1.5.0) (2023-07-29)
+
+
+### Features
+
+* **lang:** added languages back in ([8dd5f94](https://github.com/crisboarna/react-cv/commit/8dd5f9466d83c5392427e65e0fe8c17ed7604c25))
+
 # [1.4.0](https://github.com/crisboarna/react-cv/compare/v1.3.0...v1.4.0) (2023-07-29)
 
 
