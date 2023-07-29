@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/crisboarna/react-cv/compare/v1.3.0...v1.4.0) (2023-07-29)
+
+
+### Features
+
+* **eon:** added new position ([0c697e4](https://github.com/crisboarna/react-cv/commit/0c697e447e9aabd862125dc8aaf7da7fde6b15b8))
+
 # [1.3.0](https://github.com/crisboarna/react-cv/compare/v1.2.1...v1.3.0) (2023-05-23)
 
 
