@@ -7,6 +7,17 @@ const experience: CategoryProps = {
   list: [
     {
       title: 'Senior Software Engineer',
+      subtitle: 'E.ON - via Arnia',
+      subtitleLink: 'https://www.eon.com/',
+      date: 'July 2023 - Present',
+      tags: ["python","java","docker","kubernetes","azure"],
+      description: [
+        "Reduced by 80% onboarding and improved developer velocity by Dockerizing a Python & Java monorepo in devcontainers.",
+        "Refactored Python algorithmic hedging application reducing by 50% the time to market for new features.",
+      ]
+    },
+    {
+      title: 'Senior Software Engineer',
       subtitle: 'Apsis.ai',
       subtitleLink: 'https://apsis.ai',
       date: 'February 2023 - Present',
@@ -20,7 +31,7 @@ const experience: CategoryProps = {
         'eks',
       ],
       description: [
-        "Led the optimization of an AI inference pipeline for an AI platform. Creating a bespoke K8s operator to manage GPU RAM allocation for fleet of artificial neural network (ANN) workers.",
+        "Led the optimization of an AI inference pipeline for an AI platform. Worked on a custom K8s operator to manage GPU RAM allocation for fleet of artificial neural network (ANN) workers.",
         "57% reduction in E2E latency by optimizing architecture & code of the AI pipeline workflow.",
         "Improved by 95% the pod scale out time via pre-warming of K8s PVC with model metadata.",
         'Reduced by 94% the CI duration by optimizing the AI image & re-architecting CI/CD pipeline.'
@@ -41,12 +52,12 @@ const experience: CategoryProps = {
       ],
       description: [
         'Created cross-platform native conferencing application in C++ with focus on WebRTC network stack and UNIX socket cross-module communication.',
-        'Guided cross disciplinary team on integrating modules reducing UNIX TCP sockets network chatter by 55% as tracked by cAdvisor.',
+        'Reduced UNIX TCP sockets network chatter by 55% as tracked by cAdvisor.',
       ],
     },
     {
       title: 'Team Lead',
-      subtitle: 'Collinson Group - via Arnia',
+      subtitle: 'ValueDynamx - via Arnia',
       subtitleLink: 'https://www.collinsongroup.com/',
       tags: [
         'typescript',
@@ -129,7 +140,7 @@ const experience: CategoryProps = {
         'nlp',
       ],
       description: [
-        'Reduced by 90% existing 5 days serial error prone process via an event driven fault tolerant ETL. NLP datasets used to generate optimal targeted campaigns to reduce costs.',
+        'Reduced by 90% a 5 days faulty process via an event driven ETL for targeted ad campaigns.',
       ],
     },
     {
@@ -153,7 +164,6 @@ const experience: CategoryProps = {
       tags: ['java', 'spring', 'low-latency', 'angularjs', 'nodejs'],
       description: [
         'Successfully did fundamental architectural change to major project by replacing duplicate JSP pages with modular Angular web and observer, decorator, adapter based Java backend.',
-        'Cut by 70% code duplication via a common shared library as measured in SonarQube.',
       ],
     },
     {

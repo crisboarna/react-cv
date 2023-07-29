@@ -5,6 +5,7 @@ import {
   CloudFormationCustomResourceResponse,
 } from 'aws-lambda';
 import { S3 } from 'aws-sdk';
+// import * as fs from "fs";
 
 const PARAM_URL = 'CV_URL';
 // process.env[PARAM_URL]='localhost:4200';
