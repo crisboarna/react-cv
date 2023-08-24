@@ -28,7 +28,7 @@ jobs:
           encodedString: ${{ secrets.AWS_CDK_CONTEXT }}
 
       - name: 🔑 AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           role-session-name: react-cv-deploy
           aws-region: ${{ secrets.AWS_CDK_REGION }}
@@ -85,7 +85,7 @@ jobs:
           encodedString: ${{ secrets.AWS_CDK_CONTEXT }}
 
       - name: 🔑 AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-region: ${{ secrets.AWS_CDK_REGION }}
           role-to-assume: ${{ secrets.AWS_CDK_ROLE_GITHUB }}
