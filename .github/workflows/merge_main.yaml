@@ -28,7 +28,7 @@ jobs:
           encodedString: ${{ secrets.AWS_CDK_CONTEXT }}
 
       - name: 🔑 AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-session-name: react-cv-deploy
           aws-region: ${{ secrets.AWS_CDK_REGION }}
