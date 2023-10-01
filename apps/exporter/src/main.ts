@@ -52,6 +52,7 @@ export const handler: Handler<
     });
 
     const page = await browser.newPage();
+    // await page.goto(`http://localhost:4200?buttons=false`, {
     await page.goto(`https://${url}?buttons=false`, {
       waitUntil: 'networkidle0',
     });
