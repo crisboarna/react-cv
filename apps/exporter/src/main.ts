@@ -1,10 +1,11 @@
-import chromium from 'chrome-aws-lambda';
+import chromium from '@sparticuz/chromium';
+import puppeteer from 'puppeteer-core';
 import {
   Handler,
   CloudFormationCustomResourceEvent,
   CloudFormationCustomResourceResponse,
 } from 'aws-lambda';
-import { S3 } from 'aws-sdk';
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 // import * as fs from "fs";
 
 const PARAM_URL = 'CV_URL';
@@ -15,6 +16,8 @@ export const handler: Handler<
   CloudFormationCustomResourceResponse
 > = async (event): Promise<CloudFormationCustomResourceResponse> => {
   console.log(event);
+  const isLocal = process.env['CLOUD_DEPLOYED'] === 'false';
+
   const response: CloudFormationCustomResourceResponse = {
     Status: 'SUCCESS',
     Reason: '',
@@ -40,15 +43,17 @@ export const handler: Handler<
 
   try {
     console.log(`Processing ${url}`);
-    const s3Client = new S3();
+    const s3Client = new S3Client();
 
-    const executablePath = await chromium.executablePath;
-    browser = await chromium.puppeteer.launch({
-      executablePath,
-      args: [...chromium.args, '--font-render-hinting=none'],
+    browser = await puppeteer.launch({
+      args: isLocal ? puppeteer.defaultArgs() : chromium.args,
+      // args: [...chromium.args, '--font-render-hinting=none'],
       defaultViewport: chromium.defaultViewport,
+      executablePath: isLocal
+        ? "/tmp/localChromium/chromium/mac_arm-1250092/chrome-mac/Chromium.app/Contents/MacOS/Chromium"
+        : await chromium.executablePath(),
       ignoreHTTPSErrors: true,
-      headless: true,
+      headless: isLocal ? false : chromium.headless,
     });
 
     const page = await browser.newPage();
@@ -64,15 +69,13 @@ export const handler: Handler<
     console.log('Extracted pdf');
 
     // fs.writeFileSync("test.pdf",pdf, 'binary');
-    await s3Client
-      .putObject({
-        Bucket: url,
-        Key: 'Cristian Boarna CV.pdf',
-        Body: pdf,
-        StorageClass: 'INTELLIGENT_TIERING',
-      })
-      .promise();
-    console.log('Saved pdf on S3');
+    const response = await s3Client.send(new PutObjectCommand({
+      Bucket: url,
+      Key: 'Cristian Boarna CV.pdf',
+      Body: pdf,
+      StorageClass: 'INTELLIGENT_TIERING',
+    }))
+    console.log('Saved pdf on S3', response);
   } catch (error) {
     console.error(error);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -88,3 +91,20 @@ export const handler: Handler<
   console.log(`Done`, response);
   return response;
 };
+
+if (process.env['CLOUD_DEPLOYED'] === 'false') {
+  console.log("Running locally");
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  handler({} as never)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    .then(() => {
+      console.log('Done.');
+      process.exit(0);
+    })
+    .catch((err) => {
+      console.error(err);
+      process.exit(1);
+    });
+}

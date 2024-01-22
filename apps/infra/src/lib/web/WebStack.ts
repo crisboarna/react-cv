@@ -21,8 +21,8 @@ import {
   Source,
   StorageClass,
 } from 'aws-cdk-lib/aws-s3-deployment';
-import { CfnWebACL } from 'aws-cdk-lib/aws-wafv2';
-import { wafRules } from './util';
+// import { CfnWebACL } from 'aws-cdk-lib/aws-wafv2';
+// import { wafRules } from './util';
 import { Certificate } from 'aws-cdk-lib/aws-certificatemanager';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { ENV, PARAM_CDN_ID_CV } from '../../config';

@@ -7,6 +7,7 @@ const getKeyUpercase = function getKeyUpercase(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const renderSkills = function renderLanguage(key: string, entry: any) {
   return (
     <li key={`${key}`}>

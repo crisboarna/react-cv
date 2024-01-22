@@ -43,7 +43,7 @@ export const lambdaCvExport: LambdaProps = {
   name: `${PROJECT_NAME}-${nameCapitalizedCvExport}`,
   paramName: PARAM_LAMBDA_CV_EXPORT_ALIAS_ARN,
   paramNameRole: PARAM_LAMBDA_CV_EXPORT_ROLE_ARN,
-  runtime: Runtime.NODEJS_14_X,
+  runtime: Runtime.NODEJS_20_X,
   policies: (env, stackEnv) =>
     getApiIAMPolicies(lambdaNameCvExport)(env, PROJECT_NAME, stackEnv),
 };

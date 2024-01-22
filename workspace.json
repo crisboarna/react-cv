@@ -1,9 +1,0 @@
-{
-  "version": 2,
-  "projects": {
-    "exporter": "apps/exporter",
-    "infra": "apps/infra",
-    "web": "apps/web",
-    "web-e2e": "apps/web-e2e"
-  }
-}

@@ -1,10 +1,11 @@
 {
-  "root": "apps/infra",
+  "name": "infra",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/infra/src",
   "projectType": "application",
   "targets": {
     "diagram:web": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Web.ts'",
@@ -13,7 +14,7 @@
       }
     },
     "diagram:exporter": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Exporter.ts'",
@@ -22,7 +23,7 @@
       }
     },
     "diagram:layer": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Exporter-Layer.ts'",
@@ -31,7 +32,7 @@
       }
     },
     "deploy:web": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           "nx build web",
@@ -41,7 +42,7 @@
       }
     },
     "deploy:exporter": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           "nx build exporter",
@@ -51,7 +52,7 @@
       }
     },
     "deploy:layer": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           "nx build-exporter-layer infra",
@@ -61,8 +62,9 @@
       }
     },
     "build": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
+        "parallel": false,
         "commands": [
           "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Exporter-Layer.ts'",
           "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Exporter.ts'",
@@ -71,21 +73,22 @@
       }
     },
     "build-exporter-layer": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
+        "parallel": false,
         "commands": [
-          "rm -rf /tmp/chrome-aws-lambda",
-          "mkdir -p /tmp/chrome-aws-lambda && mkdir -p ./dist/apps/infra/exporter-layer",
-          "git clone --depth=1 https://github.com/alixaxel/chrome-aws-lambda.git /tmp/chrome-aws-lambda",
-          "cd /tmp/chrome-aws-lambda && make chrome-aws-lambda.zip",
-          "cp /tmp/chrome-aws-lambda/chrome-aws-lambda.zip ./dist/apps/infra/exporter-layer"
-        ],
-        "parallel": false
+          "rm -rf /tmp/chromium",
+          "mkdir -p /tmp/chromium && mkdir -p ./dist/apps/infra/exporter-layer",
+          "git clone --depth=1 https://github.com/sparticuz/chromium.git /tmp/chromium",
+          "cd /tmp/chromium && make chromium.zip",
+          "cp /tmp/chromium/chromium.zip ./dist/apps/infra/exporter-layer"
+        ]
       }
     },
     "lint": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
+        "parallel": false,
         "commands": [
           "nx lint-ts infra",
           "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Exporter-Layer.ts'",
@@ -95,19 +98,17 @@
       }
     },
     "lint-ts": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/infra/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/infra"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/infra/jest.config.js",
-        "passWithNoTests": true,
-        "codeCoverage": true
+        "jestConfig": "apps/infra/jest.config.ts"
       }
     }
   },

@@ -35,9 +35,9 @@ jobs:
           role-to-assume: ${{ secrets.AWS_CDK_ROLE_GITHUB }}
 
       - name: 🧰 Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
 
       - name: 💽 Cache dependencies
         uses: actions/cache@v3
@@ -92,9 +92,9 @@ jobs:
           role-session-name: react-cv-deploy
 
       - name: 🧰 Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
 
       - name: 💽 Cache dependencies
         uses: actions/cache@v3
@@ -142,7 +142,7 @@ jobs:
       - verify
     steps:
       - name: ❌ Cancel Workflow
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             github.rest.actions.cancelWorkflowRun({

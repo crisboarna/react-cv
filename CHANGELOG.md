@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/crisboarna/react-cv/compare/v1.6.0...v1.7.0) (2024-01-22)
+
+
+### Features
+
+* **cv:** updated dependencies ([6935f44](https://github.com/crisboarna/react-cv/commit/6935f448e94d3b8707d5eafc5207a0d5e3a13c1c))
+
 # [1.6.0](https://github.com/crisboarna/react-cv/compare/v1.5.0...v1.6.0) (2023-10-01)
 
 

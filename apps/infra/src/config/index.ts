@@ -8,7 +8,7 @@ export const TARGET_ENV = process.env.ENV;
 
 export const ARTIFACT_PATH_WEB = './../../../../dist/apps/web/';
 export const ARTIFACT_PATH_EXPORTER_LAYER =
-  './../../../../dist/apps/infra/exporter-layer/chrome-aws-lambda.zip';
+  './../../../../dist/apps/infra/exporter-layer/chromium.zip';
 
 //===PARAMETERS===
 //===ACM===

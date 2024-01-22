@@ -1,45 +1,82 @@
 {
-  "root": "apps/exporter",
+  "name": "exporter",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/exporter/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
+        "platform": "node",
         "outputPath": "dist/apps/exporter",
+        "format": ["cjs"],
+        "bundle": true,
+        "watch": false,
+        "external": ["@sparticuz/chromium"],
+        "thirdParty": true,
         "main": "apps/exporter/src/main.ts",
         "tsConfig": "apps/exporter/tsconfig.app.json",
-        "externalDependencies": ["chrome-aws-lambda","puppeteer-core","aws-sdk"]
+        "generatePackageJson": false,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
       },
       "configurations": {
+        "development": {},
         "production": {
-          "optimization": true,
-          "extractLicenses": true,
-          "inspect": false
+          "generateLockfile": true,
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
         }
       }
     },
     "serve": {
-      "executor": "@nrwl/node:node",
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
       "options": {
         "buildTarget": "exporter:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "exporter:build:development"
+        },
+        "production": {
+          "buildTarget": "exporter:build:production"
+        }
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/exporter/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/exporter"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/exporter"],
       "options": {
         "jestConfig": "apps/exporter/jest.config.js",
         "passWithNoTests": true,
         "codeCoverage": true
+      }
+    },
+    "local:chromium": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx @puppeteer/browsers install chromium@1250092 --path /tmp/localChromium"
+        ],
+        "parallel": false
       }
     }
   },

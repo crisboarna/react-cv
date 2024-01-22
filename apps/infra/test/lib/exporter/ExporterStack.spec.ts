@@ -142,7 +142,7 @@ describe('ExporterStack', function () {
         },
       ],
       MemorySize: 1024,
-      Runtime: 'nodejs14.x',
+      Runtime: 'nodejs20.x',
       Timeout: 25,
       TracingConfig: {
         Mode: 'Active',
@@ -345,7 +345,7 @@ describe('ExporterStack', function () {
         },
       ],
       MemorySize: 1024,
-      Runtime: 'nodejs14.x',
+      Runtime: 'nodejs20.x',
       Timeout: 25,
       TracingConfig: {
         Mode: 'Active',
