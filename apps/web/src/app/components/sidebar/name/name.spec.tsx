@@ -11,6 +11,6 @@ describe('Name', () => {
     );
 
     expect(getByTestId('name/h1').textContent).toEqual(TEST_NAME);
-    // expect(getByTestId('name/title').textContent).toEqual(` ${TEST_TITLE} `);
+    expect(getByTestId('name/title').textContent).toEqual(`${TEST_TITLE}`);
   });
 });

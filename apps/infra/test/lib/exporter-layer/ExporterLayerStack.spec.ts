@@ -31,7 +31,7 @@ test('ExporterLayerStack', () => {
 
   template.hasResourceProperties('AWS::Lambda::LayerVersion', {
     CompatibleArchitectures: ['x86_64'],
-    CompatibleRuntimes: ['nodejs'],
+    CompatibleRuntimes: ['nodejs20.x'],
     LayerName: `${projectName}-Puppeteer-Layer-${stackEnv}`,
   });
 

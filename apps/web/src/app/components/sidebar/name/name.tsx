@@ -8,7 +8,7 @@ const Name: FC<NameProps> = ({ name, title }) => (
       {name}
     </h1>
     <h3 className="tagline" data-testid={'name/title'}>
-      {/*{title}*/}
+      {title}
     </h3>
   </div>
 );

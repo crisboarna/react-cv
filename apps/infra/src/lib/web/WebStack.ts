@@ -21,8 +21,8 @@ import {
   Source,
   StorageClass,
 } from 'aws-cdk-lib/aws-s3-deployment';
-import { CfnWebACL } from 'aws-cdk-lib/aws-wafv2';
-import { wafRules } from './util';
+// import { CfnWebACL } from 'aws-cdk-lib/aws-wafv2';
+// import { wafRules } from './util';
 import { Certificate } from 'aws-cdk-lib/aws-certificatemanager';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { ENV, PARAM_CDN_ID_CV } from '../../config';
@@ -61,20 +61,20 @@ export class WebStack extends Stack {
       domainCertArn
     );
 
-    const wafv2 = new CfnWebACL(this, `${projectName}-WAF-${stackEnv}`, {
-      name: `${projectName}-WAF-${stackEnv}`,
-      description: `WAF for ${projectName} API`,
-      scope: 'CLOUDFRONT',
-      defaultAction: {
-        allow: {},
-      },
-      visibilityConfig: {
-        cloudWatchMetricsEnabled: true,
-        metricName: `${projectName.toLowerCase()}-waf-access-${stackEnv.toLowerCase()}`,
-        sampledRequestsEnabled: true,
-      },
-      rules: wafRules(projectName, stackEnv),
-    });
+    // const wafv2 = new CfnWebACL(this, `${projectName}-WAF-${stackEnv}`, {
+    //   name: `${projectName}-WAF-${stackEnv}`,
+    //   description: `WAF for ${projectName} API`,
+    //   scope: 'CLOUDFRONT',
+    //   defaultAction: {
+    //     allow: {},
+    //   },
+    //   visibilityConfig: {
+    //     cloudWatchMetricsEnabled: true,
+    //     metricName: `${projectName.toLowerCase()}-waf-access-${stackEnv.toLowerCase()}`,
+    //     sampledRequestsEnabled: true,
+    //   },
+    //   rules: wafRules(projectName, stackEnv),
+    // });
 
     const originAccessIdentity = new OriginAccessIdentity(
       this,
@@ -137,7 +137,7 @@ export class WebStack extends Stack {
       `${projectName}-CDN-${stackEnv}`,
       {
         comment: `${projectName}${stackEnv}`,
-        webAclId: wafv2.attrArn,
+        // webAclId: wafv2.attrArn,
         enabled: true,
         httpVersion: HttpVersion.HTTP2,
         certificate,

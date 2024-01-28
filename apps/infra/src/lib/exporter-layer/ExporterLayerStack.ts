@@ -22,7 +22,7 @@ export class ExporterLayerStack extends Stack {
         code: AssetCode.fromAsset(artifactPath),
         layerVersionName: `${projectName}-Puppeteer-Layer-${stackEnv}`,
         compatibleArchitectures: [Architecture.X86_64],
-        compatibleRuntimes: [Runtime.NODEJS],
+        compatibleRuntimes: [Runtime.NODEJS_20_X],
         description:
           'Contains puppeteer-core & dependencies needed for CV exporter',
       }

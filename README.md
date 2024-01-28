@@ -1,8 +1,8 @@
 <div align="center">
-<h1>React CV</h1>
+<h1>Boarna Cristian CV</h1>
 <h2>
   <a href="https://github.com/crisboarna/react-cv/actions/workflows/merge_main.yaml">
-    <img src="https://github.com/crisboarna/react-cv/workflows/CI/CD/badge.svg">
+    <img src="https://github.com/crisboarna/react-cv/actions/workflows/merge_main.yaml/badge.svg">
   </a>
   <a href="https://snyk.io/test/github/crisboarna/react-cv">
     <img src="https://snyk.io/test/github/crisboarna/react-cv/badge.svg?targetFile=package.json">
@@ -64,23 +64,25 @@ The CV is written as a ReactJS website which is accessible at [cv.crisboarna.com
 
 Website is hosted on `S3` accessed onl by `Cloudfront` CDN via `OIA`. You can view the [architectural diagram](#architectural-diagram) at the bottom of the page. 
 
-`Lambda` runs a headless Chrome browser via `Puppeteer` which loads the CV live page, uses Chrome inbuild PDF printing feature to generate PDF.
+`Lambda` runs a custom runtime Docker container based on Lambda NodeJS AL3 environment. This is done to ensure local and remote environments are identical.
+This container runs a headless Chrome browser via `Puppeteer` which loads the CV live page at [https://cv.crisboarna.com](https://cv.crisboarna.com), uses Chrome inbuilt PDF printing feature to generate the PDF.
+
 This has the added benefit of 
 1. Ensuring the PDF has selectable text that is extractable
 2. Has a standard rendering viewport that is not reliant on client
 
-During the CDK `Web` stack deployment, the above Lambda is called and via `Cloudformation` `Custom Resource` and places in S3 the generated PDF to be avaiable on-demand for download.
+During the CDK `Web` stack deployment, the above Lambda is called and via `Cloudformation` `Custom Resource` and places in S3 the generated PDF to be available on-demand for download to reduce download latency and reduce costs, having to invoke the Lambda only once.
 
 # Development
 **Languages and tools used**
+0. Docker
 1. Typescript
 2. AWS CDK
 3. ReactJS
 4. Webpack
 5. Nx Monorepo
-6. Localstack (optional)
 
-You can use `Localstack` for testing locally the PDF generation to S3.
+You can use `nx docker:run exporter` for testing locally the PDF generation to S3/local directory.
 
 **Testing**
 
@@ -102,9 +104,10 @@ nx serve web
 
 ### Exporter
 ```shell
-nx serve exporter
+nx docker:run exporter
 ```
-Alternatively, in the `.run` folder there is run configuration for running the `exporter` from `IntelliJ`.
+
+Alternatively, in the `.run` folder there are run configurations for running the `exporter` from `IntelliJ`.
 
 ## Building
 Build can be triggered across all services (`exporter`,`infra`,`web`) by running
@@ -114,7 +117,6 @@ yarn build
 
 Alternatively each can be run individually via one of the commands
 ```shell
-nx build-exporter-layer infra
 nx build exporter
 nx build infra
 nx build web
@@ -196,14 +198,14 @@ Individual components in order
 *Note* Deployment order is important as subsequent stacks have dependencies on previous ones.
 
 ```shell
-cdk deploy -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Exporter-Layer.ts'
+cdk deploy -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/ECR.ts'
 cdk deploy -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Exporter.ts'
 cdk deploy -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Web.ts'
 ```
 
 or simpler, with build included
 ```shell
-nx deploy:layer infra
+nx deploy:ecr infra
 nx deploy:exporter infra
 nx deploy:web infra
 ```

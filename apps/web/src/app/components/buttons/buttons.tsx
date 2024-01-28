@@ -4,7 +4,7 @@ import queryString from 'query-string';
 import { HOST_URL } from '../../../config';
 import './buttons.css';
 
-const CV_NAME = 'Cristian Boarna CV.pdf';
+const CV_NAME = 'Boarna Cristian CV.pdf';
 
 const Buttons: FC = () => {
   const [showButtons, setShowButtons] = useState<boolean>(true);

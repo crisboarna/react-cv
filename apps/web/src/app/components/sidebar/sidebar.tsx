@@ -9,6 +9,7 @@ import Skills from './skills';
 import { SidebarProps } from './index';
 import './sidebar.css';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const componentMap: Record<string, FC<any>> = {
   name: Name,
   contact: Contact,
@@ -21,6 +22,7 @@ const componentMap: Record<string, FC<any>> = {
 
 const renderSidebarCategory = function renderSidebarCategory(
   key: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: any
 ) {
   if (key !== 'children') {

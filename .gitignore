@@ -1,9 +1,11 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
-/tmp
+dist
+tmp
+.nx
 /out-tsc
+*.pdf
 
 # dependencies
 node_modules
@@ -43,4 +45,4 @@ Thumbs.db
 /cdk.out
 *.tgz
 
-/**/dist/
+.nx/cache

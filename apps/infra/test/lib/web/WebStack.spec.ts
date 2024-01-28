@@ -17,6 +17,7 @@ describe('WebStack', () => {
   const stackProps: WebStackProps = {
     artifactPath,
     env: { account: '123456789123', region: 'us-east-1' },
+    stackEnv: 'stackEnv',
     domainCertParamName,
     domainName,
     exporterFnParamName,
@@ -36,19 +37,19 @@ describe('WebStack', () => {
     // then
     const template = Template.fromStack(stack);
 
-    template.resourceCountIs('AWS::WAFv2::WebACL', 1);
-    template.hasResourceProperties('AWS::WAFv2::WebACL', {
-      Name: `${projectName}-WAF-${stackEnv}`,
-      Scope: 'CLOUDFRONT',
-      DefaultAction: {
-        Allow: {},
-      },
-      VisibilityConfig: {
-        CloudWatchMetricsEnabled: true,
-        MetricName: `${projectName.toLowerCase()}-waf-access-${stackEnv.toLowerCase()}`,
-        SampledRequestsEnabled: true,
-      },
-    });
+    // template.resourceCountIs('AWS::WAFv2::WebACL', 1);
+    // template.hasResourceProperties('AWS::WAFv2::WebACL', {
+    //   Name: `${projectName}-WAF-${stackEnv}`,
+    //   Scope: 'CLOUDFRONT',
+    //   DefaultAction: {
+    //     Allow: {},
+    //   },
+    //   VisibilityConfig: {
+    //     CloudWatchMetricsEnabled: true,
+    //     MetricName: `${projectName.toLowerCase()}-waf-access-${stackEnv.toLowerCase()}`,
+    //     SampledRequestsEnabled: true,
+    //   },
+    // });
 
     template.resourceCountIs(
       'AWS::CloudFront::CloudFrontOriginAccessIdentity',
@@ -220,9 +221,9 @@ describe('WebStack', () => {
           MinimumProtocolVersion: 'TLSv1.2_2021',
           SslSupportMethod: 'sni-only',
         },
-        WebACLId: {
-          'Fn::GetAtt': [Match.anyValue(), 'Arn'],
-        },
+        // WebACLId: {
+        //   'Fn::GetAtt': [Match.anyValue(), 'Arn'],
+        // },
       },
     });
 
@@ -293,19 +294,19 @@ describe('WebStack', () => {
     // then
     const template = Template.fromStack(stack);
 
-    template.resourceCountIs('AWS::WAFv2::WebACL', 1);
-    template.hasResourceProperties('AWS::WAFv2::WebACL', {
-      Name: `${projectName}-WAF-${stackEnv}`,
-      Scope: 'CLOUDFRONT',
-      DefaultAction: {
-        Allow: {},
-      },
-      VisibilityConfig: {
-        CloudWatchMetricsEnabled: true,
-        MetricName: `${projectName.toLowerCase()}-waf-access-${stackEnv.toLowerCase()}`,
-        SampledRequestsEnabled: true,
-      },
-    });
+    // template.resourceCountIs('AWS::WAFv2::WebACL', 1);
+    // template.hasResourceProperties('AWS::WAFv2::WebACL', {
+    //   Name: `${projectName}-WAF-${stackEnv}`,
+    //   Scope: 'CLOUDFRONT',
+    //   DefaultAction: {
+    //     Allow: {},
+    //   },
+    //   VisibilityConfig: {
+    //     CloudWatchMetricsEnabled: true,
+    //     MetricName: `${projectName.toLowerCase()}-waf-access-${stackEnv.toLowerCase()}`,
+    //     SampledRequestsEnabled: true,
+    //   },
+    // });
 
     template.resourceCountIs(
       'AWS::CloudFront::CloudFrontOriginAccessIdentity',
@@ -364,7 +365,12 @@ describe('WebStack', () => {
             ],
           },
           {
-            Action: ['s3:GetBucket*', 's3:List*', 's3:DeleteObject*'],
+            Action: [
+              's3:PutBucketPolicy',
+              's3:GetBucket*',
+              's3:List*',
+              's3:DeleteObject*',
+            ],
             Effect: 'Allow',
             Principal: {
               AWS: {
@@ -496,9 +502,9 @@ describe('WebStack', () => {
           MinimumProtocolVersion: 'TLSv1.2_2021',
           SslSupportMethod: 'sni-only',
         },
-        WebACLId: {
-          'Fn::GetAtt': [Match.anyValue(), 'Arn'],
-        },
+        // WebACLId: {
+        //   'Fn::GetAtt': [Match.anyValue(), 'Arn'],
+        // },
       },
     });
 

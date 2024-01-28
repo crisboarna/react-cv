@@ -35,9 +35,15 @@ jobs:
           role-to-assume: ${{ secrets.AWS_CDK_ROLE_GITHUB }}
 
       - name: 🧰 Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
+
+      - name: 🧰 Setup QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: 🧰 Setup Docker BuildX
+        uses: docker/setup-buildx-action@v3
 
       - name: 💽 Cache dependencies
         uses: actions/cache@v3
@@ -68,3 +74,10 @@ jobs:
           AWS_CDK_REGION: ${{ secrets.AWS_CDK_REGION }}
           AWS_CDK_DOMAIN_NAME: ${{ secrets.AWS_CDK_DOMAIN_NAME }}
           ENV: ${{ secrets.AWS_CDK_ENV }}
+
+      - name: 🏗 Build Exporter
+        uses: docker/build-push-action@v5
+        with:
+          push: false
+          context: .
+          file: ./apps/exporter/Dockerfile

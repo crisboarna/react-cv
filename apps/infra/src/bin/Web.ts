@@ -54,4 +54,8 @@ NagSuppressions.addStackSuppressions(web, [
     id: 'AwsSolutions-IAM5',
     reason: 'XRay policy that is AWS managed',
   },
+  {
+    id: 'AwsSolutions-L1',
+    reason: 'CDK generated construct, cannot update BucketDeployment Lambda version',
+  }
 ]);

@@ -35,9 +35,9 @@ jobs:
           role-to-assume: ${{ secrets.AWS_CDK_ROLE_GITHUB }}
 
       - name: 🧰 Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
 
       - name: 💽 Cache dependencies
         uses: actions/cache@v3
@@ -69,7 +69,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-20.04
-    timeout-minutes: 10
+    timeout-minutes: 11
     permissions:
       id-token: write
       contents: write
@@ -92,9 +92,15 @@ jobs:
           role-session-name: react-cv-deploy
 
       - name: 🧰 Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
+
+      - name: 🧰 Setup QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: 🧰 Setup Docker BuildX
+        uses: docker/setup-buildx-action@v3
 
       - name: 💽 Cache dependencies
         uses: actions/cache@v3
@@ -106,6 +112,17 @@ jobs:
       - name: 📦 Install Dependencies
         run: yarn install
 
+      - name: ✨ Linting
+        run: yarn lint
+        env:
+          AWS_CDK_ACCOUNT: ${{ secrets.AWS_CDK_ACCOUNT }}
+          AWS_CDK_REGION: ${{ secrets.AWS_CDK_REGION }}
+          AWS_CDK_DOMAIN_NAME: ${{ secrets.AWS_CDK_DOMAIN_NAME }}
+          ENV: ${{ secrets.AWS_CDK_ENV }}
+
+      - name: 🧪 Tests
+        run: yarn test
+
       - name: 🏗️ Build
         run: yarn build
         env:
@@ -113,6 +130,27 @@ jobs:
           AWS_CDK_REGION: ${{ secrets.AWS_CDK_REGION }}
           AWS_CDK_DOMAIN_NAME: ${{ secrets.AWS_CDK_DOMAIN_NAME }}
           ENV: ${{ secrets.AWS_CDK_ENV }}
+
+      - name: 🚀 Deploy ECR
+        run: yarn run nx deploy:ecr infra
+        env:
+          AWS_CDK_ACCOUNT: ${{ secrets.AWS_CDK_ACCOUNT }}
+          AWS_CDK_REGION: ${{ secrets.AWS_CDK_REGION }}
+          AWS_CDK_DOMAIN_NAME: ${{ secrets.AWS_CDK_DOMAIN_NAME }}
+          ENV: ${{ secrets.AWS_CDK_ENV }}
+
+      - name: 🔐Login to ECR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.AWS_CDK_ACCOUNT }}.dkr.ecr.${{ secrets.AWS_CDK_REGION }}.amazonaws.com
+
+      - name: 🏗 Build Exporter
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          context: .
+          file: ./apps/exporter/Dockerfile
+          tags: ${{ secrets.AWS_CDK_ACCOUNT }}.dkr.ecr.${{ secrets.AWS_CDK_REGION }}.amazonaws.com/cv-exporter:latest
 
       - name: 🚀 Deploy Exporter
         run: yarn run nx deploy:exporter infra
@@ -142,7 +180,7 @@ jobs:
       - verify
     steps:
       - name: ❌ Cancel Workflow
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             github.rest.actions.cancelWorkflowRun({

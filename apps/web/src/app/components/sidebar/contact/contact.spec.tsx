@@ -20,6 +20,14 @@ describe('Contact', () => {
     expect(queryAllByTestId('contact/item-icon-anchor').length).toEqual(0);
   });
 
+  it('should render without contact details', () => {
+    const { getByTestId, queryAllByTestId } = render(<Contact />);
+
+    expect(getByTestId('contact/container')).toBeDefined();
+    expect(queryAllByTestId('contact/item').length).toEqual(0);
+    expect(queryAllByTestId('contact/item-icon-anchor').length).toEqual(0);
+  });
+
   it('should render with title', () => {
     const { getByTestId, queryAllByTestId } = render(
       <Contact email={TEST_EMAIL} phone={TEST_PHONE} website={TEST_CONTACT} />

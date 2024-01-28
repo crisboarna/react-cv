@@ -106,6 +106,7 @@ const sidebar: SidebarProps = {
       { name: 'English', level: 'Native - C2' },
       { name: 'Romanian', level: 'Native - C2' },
       { name: 'French', level: 'Beginner - A2' },
+      { name: 'Spanish', level: 'Beginner - A2' },
     ],
   },
   interests: {

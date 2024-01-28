@@ -18,10 +18,10 @@ describe('CV', () => {
     it('should render given empty props', () => {
       const { queryAllByTestId } = render(
         <CV
-          profile={emptyProps as any}
-          experience={emptyProps as any}
-          projects={emptyProps as any}
-          sidebar={emptyProps as any}
+          profile={emptyProps as never}
+          experience={emptyProps as never}
+          projects={emptyProps as never}
+          sidebar={emptyProps as never}
         />
       );
       expect(queryAllByTestId('cv/root').length).toEqual(1);
@@ -30,7 +30,7 @@ describe('CV', () => {
 
     it('should render experience category', () => {
       const { queryAllByTestId, getByTestId } = render(
-        <CV experience={experienceProps as any} />
+        <CV experience={experienceProps as never} />
       );
       expect(queryAllByTestId('cv/root').length).toEqual(1);
       expect(getByTestId('section/header-title').textContent).toEqual(
@@ -47,7 +47,7 @@ describe('CV', () => {
 
       it('should render default profile', () => {
         const { queryAllByTestId, getByTestId } = render(
-          <CV profile={emptyProps as any} />
+          <CV profile={emptyProps as never} />
         );
         expect(queryAllByTestId('cv/root').length).toEqual(1);
         expect(getByTestId('section/header-title').textContent).toEqual(
@@ -58,7 +58,7 @@ describe('CV', () => {
       it('should render with provided title', () => {
         const titleProps = { title: TEST_TITLE };
         const { queryAllByTestId, getByTestId } = render(
-          <CV profile={titleProps as any} />
+          <CV profile={titleProps as never} />
         );
         expect(queryAllByTestId('cv/root').length).toEqual(1);
         expect(getByTestId('section/header-title').textContent).toEqual(
@@ -69,7 +69,7 @@ describe('CV', () => {
       it('should render with provided title, icon', () => {
         const titleProps = { title: TEST_TITLE, icon: TEST_ICON };
         const { queryAllByTestId, getByTestId } = render(
-          <CV profile={titleProps as any} />
+          <CV profile={titleProps as never} />
         );
         expect(queryAllByTestId('cv/root').length).toEqual(1);
         expect(getByTestId('section/header-title').textContent).toEqual(

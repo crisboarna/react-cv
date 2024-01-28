@@ -1,46 +1,106 @@
 {
-  "root": "apps/exporter",
+  "name": "exporter",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/exporter/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
+        "platform": "node",
         "outputPath": "dist/apps/exporter",
+        "format": ["cjs"],
+        "bundle": true,
+        "watch": false,
+        "external": ["@sparticuz/chromium","puppeteer-core"],
+        "thirdParty": true,
         "main": "apps/exporter/src/main.ts",
         "tsConfig": "apps/exporter/tsconfig.app.json",
-        "externalDependencies": ["chrome-aws-lambda","puppeteer-core","aws-sdk"]
+        "generatePackageJson": false,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
       },
       "configurations": {
+        "development": {},
         "production": {
-          "optimization": true,
-          "extractLicenses": true,
-          "inspect": false
+          "generateLockfile": true,
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
         }
       }
     },
     "serve": {
-      "executor": "@nrwl/node:node",
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
       "options": {
         "buildTarget": "exporter:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "exporter:build:development"
+        },
+        "production": {
+          "buildTarget": "exporter:build:production"
+        }
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/exporter/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/exporter"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/exporter"],
       "options": {
         "jestConfig": "apps/exporter/jest.config.js",
         "passWithNoTests": true,
         "codeCoverage": true
       }
+    },
+    "local:chromium": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx @puppeteer/browsers install chromium@1250092 --path /tmp/localChromium"
+        ],
+        "parallel": false
+      }
+    },
+    "docker:build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/exporter/Dockerfile --platform linux/amd64 -t $AWS_CDK_ACCOUNT.dkr.ecr.$AWS_CDK_REGION.amazonaws.com/cv-exporter:latest ."
+    },
+    "docker:up": {
+      "dependsOn": ["docker:build"],
+      "command": "docker compose -f apps/exporter/docker-compose.yaml up --build"
+    },
+    "docker:down": {
+      "dependsOn": ["docker:up"],
+      "command": "docker compose -f apps/exporter/docker-compose.yaml down"
+    },
+    "docker:run": {
+      "dependsOn": ["docker:down"],
+      "command": "exit 0"
+    },
+    "docker:login": {
+      "command": "aws ecr get-login-password --region $AWS_CDK_REGION | docker login --username AWS --password-stdin $AWS_CDK_ACCOUNT.dkr.ecr.$AWS_CDK_REGION.amazonaws.com"
+    },
+    "docker:push": {
+      "dependsOn": ["docker:login","docker:build"],
+      "command": "docker push $AWS_CDK_ACCOUNT.dkr.ecr.$AWS_CDK_REGION.amazonaws.com/cv-exporter:latest"
     }
   },
   "tags": []

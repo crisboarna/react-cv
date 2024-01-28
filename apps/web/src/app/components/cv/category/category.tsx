@@ -58,7 +58,17 @@ const renderCategory = function renderCategory(
   i: number
 ) {
   return (
-    <div data-testid={'category/item'} className={`item ${item.subtitle?.includes('Collinson') ? 'item-gap' : ''}`} key={`exp_item_${i}`}>
+    <div
+      data-testid={'category/item'}
+      className={`item ${
+        item.subtitle?.includes('Collinson')
+          ? 'item-gap'
+          : item.title.includes('InnerI')
+          ? 'item-gap-projects'
+          : ''
+      }`}
+      key={`exp_item_${i}`}
+    >
       {/*// puppeteer does not take into account padding by itself when on next page*/}
       <div className="meta">
         <div className="upper-row">
