@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  exporter:
+    build:
+      context: ../..
+      dockerfile: apps/exporter/Dockerfile
+    image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/cv-exporter:latest
+    container_name: cv_exporter
+    hostname: cv_exporter
+    platform: linux/amd64
+    ports:
+      - "9000:8080"
+    environment:
+      - CLOUD_DEPLOYED=false
+      - CV_URL=cv.crisboarna.com
+#      - CV_URL=localhost:4200
+    volumes:
+      - $PWD/apps/exporter:/tmp/output

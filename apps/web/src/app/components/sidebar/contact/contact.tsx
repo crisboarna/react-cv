@@ -6,6 +6,7 @@ import './contact.css';
 
 const renderContactAnchors = function renderContactAnchors(
   href: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   entry: any
 ) {
   return (
@@ -25,6 +26,7 @@ const renderContactAnchors = function renderContactAnchors(
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const renderContactInfo = function renderContactInfo(key: string, entry: any) {
   if (key !== 'children' && entry.constructor === Object) {
     let href;

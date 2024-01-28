@@ -5,10 +5,11 @@ export const AWS_ACCOUNT = process.env.AWS_CDK_ACCOUNT;
 export const AWS_REGION = process.env.AWS_CDK_REGION;
 export const AWS_DOMAIN_NAME = process.env.AWS_CDK_DOMAIN_NAME;
 export const TARGET_ENV = process.env.ENV;
+export const ECR_REPO_NAME = `${PROJECT_NAME.toLowerCase()}-exporter`;
 
 export const ARTIFACT_PATH_WEB = './../../../../dist/apps/web/';
 export const ARTIFACT_PATH_EXPORTER_LAYER =
-  './../../../../dist/apps/infra/exporter-layer/chrome-aws-lambda.zip';
+  './../../../../dist/apps/infra/exporter-layer/chromium.zip';
 
 //===PARAMETERS===
 //===ACM===

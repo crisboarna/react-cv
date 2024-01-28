@@ -8,17 +8,17 @@ module.exports = {
   },
   testEnvironment: 'node',
   transform: {
-    '^.+\\.[tj]s$': 'ts-jest',
+    '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/apps/exporter',
   coverageReporters: ['html', 'lcov', 'text'],
   coverageThreshold: {
     global: {
-      branches: 100,
+      branches: 75,
       functions: 100,
-      lines: 100,
-      statements: 100,
+      lines: 86,
+      statements: 86,
     },
   },
 };

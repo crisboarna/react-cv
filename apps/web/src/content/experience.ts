@@ -12,7 +12,7 @@ const experience: CategoryProps = {
       date: 'July 2023 - Present',
       tags: ["python","java","docker","kubernetes","azure"],
       description: [
-        "Achieved a dramatic reduction in trading platform order execution time from 30 seconds to 5 microseconds through cunning rewrite of the order execution algorithm.",
+        "Achieved a dramatic 100% reduction in trading platform order execution time from 30 seconds to 5 microseconds through cunning rewrite of the order execution algorithm.",
         "Standardized order routing algorithm config through trader friendly rule generation UI that reduced by 90% the time to market for new trading strategies with no code changes required.",
         "Reduced by 80% onboarding time and increased developer velocity by Dockerizing a Python & Java monorepo in devcontainers.",
       ]

@@ -13,7 +13,7 @@ describe('Certifications', () => {
   const TEST_LIST = [TEST_CERT];
 
   it('should render without props', () => {
-    const { getByTestId, queryAllByTestId, getAllByTitle } = render(
+    const { getByTestId, queryAllByTestId } = render(
       <Certifications />
     );
     expect(queryAllByTestId('certifications/container').length).toEqual(1);
