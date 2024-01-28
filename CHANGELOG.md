@@ -3,6 +3,13 @@
 
 ### Features
 
+* **exporter:** changed lambda to custom docker runtime & removed waf for cost reduction ([6c0d83f](https://github.com/crisboarna/react-cv/commit/6c0d83f89b4d5e5dd1b8941d6729241fa1b9e165))
+
+# [1.7.0](https://github.com/crisboarna/react-cv/compare/v1.6.0...v1.7.0) (2024-01-28)
+
+
+### Features
+
 * **exporter:** changed lambda to custom docker runtime & removed waf for cost reduction ([8f00cd2](https://github.com/crisboarna/react-cv/commit/8f00cd2698d2d64419e8e42fd44c259e52e889e6))
 
 # [1.7.0](https://github.com/crisboarna/react-cv/compare/v1.6.0...v1.7.0) (2024-01-22)
