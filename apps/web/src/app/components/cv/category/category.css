@@ -1,0 +1,15 @@
+.main-wrapper .category-section .item:last-child {
+  margin-bottom: 20px;
+}
+
+.main-wrapper .category-section .item {
+  margin-bottom: 22px;
+}
+
+.main-wrapper .category-section .item-gap {
+  padding-top: 25px;
+}
+
+.main-wrapper .category-section .item-gap-projects {
+  padding-top: 23px;
+}

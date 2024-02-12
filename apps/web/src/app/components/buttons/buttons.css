@@ -1,0 +1,12 @@
+button {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}

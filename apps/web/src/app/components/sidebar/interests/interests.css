@@ -1,0 +1,15 @@
+.sidebar-wrapper .interests-list {
+  margin-bottom: 0;
+}
+
+.sidebar-wrapper .interests-list li {
+  margin-bottom: 10px;
+}
+
+.sidebar-wrapper .interests-list li:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-wrapper .interests-container .interest-desc {
+  color: rgba(255, 255, 255, 0.6);
+}

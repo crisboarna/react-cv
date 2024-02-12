@@ -1,0 +1,136 @@
+{
+  "name": "infra",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/infra/src",
+  "projectType": "application",
+  "targets": {
+    "diagram:web": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Web.ts'",
+          "cfn-dia html --template-file=cdk.out/Cv-Web-PROD.template.json"
+        ]
+      }
+    },
+    "diagram:exporter": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Exporter.ts'",
+          "cfn-dia html --template-file=cdk.out/Cv-Exporter-PROD.template.json"
+        ]
+      }
+    },
+    "diagram:layer": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Exporter-Layer.ts'",
+          "cfn-dia html --template-file=cdk.out/Cv-Exporter-Layer-PROD.template.json"
+        ]
+      }
+    },
+    "deploy:web": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build web",
+          "cdk deploy --require-approval never -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Web.ts'"
+        ],
+        "parallel": false
+      }
+    },
+    "deploy:exporter": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build exporter",
+          "cdk deploy --require-approval never -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Exporter.ts'"
+        ],
+        "parallel": false
+      }
+    },
+    "deploy:ecr": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "cdk deploy --require-approval never -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/ECR.ts'"
+        ],
+        "parallel": false
+      }
+    },
+    "deploy:layer": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx build-exporter-layer infra",
+          "cdk deploy --require-approval never -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Exporter-Layer.ts'"
+        ],
+        "parallel": false
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx deploy:ecr infra",
+          "nx deploy:exporter infra",
+          "nx deploy:web infra"
+        ],
+        "parallel": false
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": false,
+        "commands": [
+          "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/ECR.ts'",
+          "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Exporter.ts'",
+          "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Web.ts'"
+        ]
+      }
+    },
+    "build-exporter-layer": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": false,
+        "commands": [
+          "rm -rf /tmp/chromium",
+          "mkdir -p /tmp/chromium && mkdir -p ./dist/apps/infra/exporter-layer",
+          "git clone --depth=1 https://github.com/sparticuz/chromium.git /tmp/chromium",
+          "cd /tmp/chromium && make chromium.zip",
+          "cp /tmp/chromium/chromium.zip ./dist/apps/infra/exporter-layer"
+        ]
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": false,
+        "commands": [
+          "nx lint-ts infra",
+          "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Exporter-Layer.ts'",
+          "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Exporter.ts'",
+          "cdk synth -q -a 'npx ts-node --prefer-ts-exts -P apps/infra/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config apps/infra/src/bin/Web.ts'"
+        ]
+      }
+    },
+    "lint-ts": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/infra/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/infra/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

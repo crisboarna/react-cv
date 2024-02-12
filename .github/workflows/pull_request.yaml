@@ -1,0 +1,83 @@
+name: pull_request
+
+on:
+  pull_request:
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/head/main/' || github.run_number }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
+jobs:
+  verify:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 5
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔑 Decode AWS CDK Context
+        uses: timheuer/base64-to-file@v1.1
+        with:
+          fileName: 'cdk.context.json'
+          encodedString: ${{ secrets.AWS_CDK_CONTEXT }}
+
+      - name: 🔑 AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-session-name: react-cv-deploy
+          aws-region: ${{ secrets.AWS_CDK_REGION }}
+          role-to-assume: ${{ secrets.AWS_CDK_ROLE_GITHUB }}
+
+      - name: 🧰 Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 🧰 Setup QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: 🧰 Setup Docker BuildX
+        uses: docker/setup-buildx-action@v3
+
+      - name: 💽 Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+
+      - name: 📦 Install Dependencies
+        run: yarn install
+
+      - name: ✨ Linting
+        run: yarn lint
+        env:
+          AWS_CDK_ACCOUNT: ${{ secrets.AWS_CDK_ACCOUNT }}
+          AWS_CDK_REGION: ${{ secrets.AWS_CDK_REGION }}
+          AWS_CDK_DOMAIN_NAME: ${{ secrets.AWS_CDK_DOMAIN_NAME }}
+          ENV: ${{ secrets.AWS_CDK_ENV }}
+
+      - name: 🧪 Tests
+        run: yarn test
+
+      - name: 🏗️ Build
+        run: yarn build
+        env:
+          AWS_CDK_ACCOUNT: ${{ secrets.AWS_CDK_ACCOUNT }}
+          AWS_CDK_REGION: ${{ secrets.AWS_CDK_REGION }}
+          AWS_CDK_DOMAIN_NAME: ${{ secrets.AWS_CDK_DOMAIN_NAME }}
+          ENV: ${{ secrets.AWS_CDK_ENV }}
+
+      - name: 🏗 Build Exporter
+        uses: docker/build-push-action@v5
+        with:
+          push: false
+          context: .
+          file: ./apps/exporter/Dockerfile

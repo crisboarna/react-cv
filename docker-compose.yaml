@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    image: cv_web:latest
+    container_name: cv_web
+    hostname: cv_web
+    ports:
+      - "4200:4200"
+    volumes:
+      - $PWD:/usr/app
+      - /usr/app/node_modules
+    networks:
+      - cv
+
+  exporter:
+    build:
+      context: .
+      dockerfile: apps/exporter/Dockerfile
+    image: ${AWS_CDK_ACCOUNT}.dkr.ecr.${AWS_CDK_REGION}.amazonaws.com/cv-exporter:latest
+    container_name: cv_exporter
+    hostname: cv_exporter
+    platform: linux/amd64
+    env_file:
+      - .env
+    ports:
+      - "9000:8080"
+    volumes:
+      - $PWD:/tmp/output
+    networks:
+      - cv
+
+networks:
+  cv:
